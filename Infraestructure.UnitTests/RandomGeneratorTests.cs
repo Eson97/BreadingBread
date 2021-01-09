@@ -1,6 +1,6 @@
 ﻿using Xunit;
 
-namespace RestApiCleanArch.Infraestructure.UnitTests
+namespace BreadingBread.Infraestructure.UnitTests
 {
     public class RandomGeneratorTests
     {

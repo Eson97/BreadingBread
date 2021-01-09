@@ -1,0 +1,13 @@
+{
+  "solution": {
+    "path": "BreadingBreadWeb.sln",
+    "projects": [
+      "BreadingBread.Application\\Application.csproj",
+      "BreadingBread.Common\\Common.csproj",
+      "BreadingBread.Domain\\Domain.csproj",
+      "BreadingBread.Infraestructure\\Infraestructure.csproj",
+      "BreadingBread.Persistence\\Persistence.csproj",
+      "BreadingBread.WebUi\\WebUi.csproj"
+    ]
+  }
+}

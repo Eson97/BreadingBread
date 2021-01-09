@@ -5,9 +5,9 @@
 
     <IsPackable>false</IsPackable>
 
-    <RootNamespace>RestApiCleanArch.Infraestructure.UnitTests</RootNamespace>
+    <RootNamespace>BreadingBread.Infraestructure.UnitTests</RootNamespace>
 
-    <AssemblyName>RestApiCleanArch.Infraestructure.UnitTests</AssemblyName>
+    <AssemblyName>BreadingBread.Infraestructure.UnitTests</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RestApiCleanArch.Infraestructure\Infraestructure.csproj" />
+    <ProjectReference Include="..\BreadingBread.Infraestructure\Infraestructure.csproj" />
   </ItemGroup>
 
 </Project>

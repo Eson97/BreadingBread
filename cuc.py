@@ -28,13 +28,13 @@ typeReq = ("Commands" if isCommand else "Queries")
 
 responseType = responseFileName if not returnsEnumerable else f"IEnumerable<{responseFileName}>"
 
-filePrefix = f"RestApiCleanArch.Application\\UseCases\\{folder}\\{typeReq}\\{name}\\"
+filePrefix = f"BreadingBread.Application\\UseCases\\{folder}\\{typeReq}\\{name}\\"
 
 os.makedirs(filePrefix)
 
 authFile = open(filePrefix + authFileName + ".cs", "x")
-authFile.write(f"""using RestApiCleanArch.Application.Interfaces;
-using RestApiCleanArch.Application.Security;
+authFile.write(f"""using BreadingBread.Application.Interfaces;
+using BreadingBread.Application.Security;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -42,14 +42,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RestApiCleanArch.Application.UseCases.{folder}.{typeReq}.{name}
+namespace BreadingBread.Application.UseCases.{folder}.{typeReq}.{name}
 {{
     public class {authFileName} : IAdminRequest<{requestFileName}, {responseType}>
     {{
-        private readonly IRestApiCleanArchDbContext db;
+        private readonly IBreadingBreadDbContext db;
         private readonly IUserAccessor currentUser;
 
-        public {authFileName}(IRestApiCleanArchDbContext db, IUserAccessor currentUser)
+        public {authFileName}(IBreadingBreadDbContext db, IUserAccessor currentUser)
         {{
             this.db = db;
             this.currentUser = currentUser;
@@ -68,8 +68,8 @@ print("Writing " + authFile.name)
 authFile.close()
 
 handlerFile = open(filePrefix + handlerFileName + ".cs", "x")
-handlerFile.write(f"""using RestApiCleanArch.Application.Exceptions;
-using RestApiCleanArch.Application.Interfaces;
+handlerFile.write(f"""using BreadingBread.Application.Exceptions;
+using BreadingBread.Application.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -79,13 +79,13 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace RestApiCleanArch.Application.UseCases.{folder}.{typeReq}.{name}
+namespace BreadingBread.Application.UseCases.{folder}.{typeReq}.{name}
 {{
     public class {handlerFileName} : IRequestHandler<{requestFileName}, {responseType}>
     {{
-        private readonly IRestApiCleanArchDbContext db;
+        private readonly IBreadingBreadDbContext db;
 
-        public {handlerFileName}(IRestApiCleanArchDbContext db)
+        public {handlerFileName}(IBreadingBreadDbContext db)
         {{
             this.db = db;
         }}
@@ -107,7 +107,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace RestApiCleanArch.Application.UseCases.{folder}.{typeReq}.{name}
+namespace BreadingBread.Application.UseCases.{folder}.{typeReq}.{name}
 {{
     public class {requestFileName} : IRequest<{responseType}>
     {{
@@ -123,7 +123,7 @@ responseFile.write(f"""using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace RestApiCleanArch.Application.UseCases.{folder}.{typeReq}.{name}
+namespace BreadingBread.Application.UseCases.{folder}.{typeReq}.{name}
 {{
     public class {responseFileName}
     {{
@@ -140,7 +140,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace RestApiCleanArch.Application.UseCases.{folder}.{typeReq}.{name}
+namespace BreadingBread.Application.UseCases.{folder}.{typeReq}.{name}
 {{
     public class {validatorFileName} : AbstractValidator<{requestFileName}>
     {{
