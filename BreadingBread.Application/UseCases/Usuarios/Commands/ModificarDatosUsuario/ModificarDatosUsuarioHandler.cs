@@ -18,24 +18,20 @@ namespace BreadingBread.Application.UseCases.Usuarios.Commands.ModificarDatosUsu
 
         public async Task<ModificarDatosUsuarioResponse> Handle(ModificarDatosUsuarioCommand request, CancellationToken cancellationToken)
         {
-            Usuario entity = await db.Usuario.FindAsync(request.IdUsuario);
+            User entity = await db.User.FindAsync(request.IdUsuario);
             if (entity == null)
             {
-                throw new NotFoundException(nameof(Usuario), request.IdUsuario);
+                throw new NotFoundException(nameof(User), request.IdUsuario);
             }
 
-            entity.Nombre = request.Nombre;
-            entity.ApellidoPaterno = request.ApellidoPaterno;
-            entity.ApellidoMaterno = request.ApellidoMaterno;
+            entity.Name = request.Name;
 
             await db.SaveChangesAsync(cancellationToken);
 
             return new ModificarDatosUsuarioResponse
             {
                 IdUsuario = entity.Id,
-                Nombre = entity.Nombre,
-                ApellidoPaterno = entity.ApellidoPaterno,
-                ApellidoMaterno = entity.ApellidoMaterno
+                Nombre = entity.Name
             };
         }
     }

@@ -19,15 +19,13 @@ namespace BreadingBread.Application.UseCases.Usuarios.Commands.DeleteUsuario
         public async Task<DeleteUsuarioResponse> Handle(DeleteUsuarioCommand request, CancellationToken cancellationToken)
         {
             var user = await db
-                        .Usuario
-                        .SingleOrDefaultAsync(el => el.NombreUsuario == request.NombreUsuario || el.Email == request.NombreUsuario);
+                        .User
+                        .SingleOrDefaultAsync(el => el.UserName == request.UserName);
             if (user != null)
             {
-                var archivos = await db.ArchivoUsuario.Where(el => el.IdUsuario == user.Id).ToListAsync();
-                var tokens = await db.UsuarioToken.Where(el => el.IdUsuario == user.Id).ToListAsync();
-                db.ArchivoUsuario.RemoveRange(archivos); //TODO delete files from server
-                db.UsuarioToken.RemoveRange(tokens);
-                db.Usuario.Remove(user);
+                var tokens = await db.UserToken.Where(el => el.IdUser == user.Id).ToListAsync();
+                db.UserToken.RemoveRange(tokens);
+                db.User.Remove(user);
                 await db.SaveChangesAsync(cancellationToken);
             }
 

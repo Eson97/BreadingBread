@@ -6,6 +6,6 @@ namespace BreadingBread.Application.Interfaces
     {
         int UserId { get; }
         bool IsAuthenticated { get; }
-        TiposUsuario TipoUsuario { get; }
+        UserType TipoUsuario { get; }
     }
 }

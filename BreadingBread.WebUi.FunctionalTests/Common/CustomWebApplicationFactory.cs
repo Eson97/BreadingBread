@@ -131,7 +131,7 @@ namespace BreadingBread.WebUi.FunctionalTests.Common
         {
             string content = JsonConvert.SerializeObject(new GetUsuarioLoginQuery
             {
-                NombreUsuario = userName,
+                UserName = userName,
                 Password = password
             });
 

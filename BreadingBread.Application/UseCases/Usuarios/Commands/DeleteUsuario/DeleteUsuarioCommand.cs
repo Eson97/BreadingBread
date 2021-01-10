@@ -4,6 +4,6 @@ namespace BreadingBread.Application.UseCases.Usuarios.Commands.DeleteUsuario
 {
     public class DeleteUsuarioCommand : IRequest<DeleteUsuarioResponse>
     {
-        public string NombreUsuario { get; set; }
+        public string UserName { get; set; }
     }
 }

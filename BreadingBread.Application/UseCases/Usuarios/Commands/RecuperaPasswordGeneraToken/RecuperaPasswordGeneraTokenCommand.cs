@@ -4,6 +4,6 @@ namespace BreadingBread.Application.UseCases.Usuarios.Commands.RecuperaPasswordG
 {
     public class RecuperaPasswordGeneraTokenCommand : IRequest<RecuperaPasswordGeneraTokenResponse>
     {
-        public string Email { get; set; }
+        public string UserName { get; set; }
     }
 }

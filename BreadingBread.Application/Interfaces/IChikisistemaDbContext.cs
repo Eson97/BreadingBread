@@ -8,17 +8,13 @@ namespace BreadingBread.Application.Interfaces
 {
     public interface IBreadingBreadDbContext
     {
-        DbSet<Reporte> Reporte { get; set; }
-        DbSet<Archivo> ArchivoUsuario { get; set; }
-        DbSet<Usuario> Usuario { get; set; }
-        DbSet<UsuarioToken> UsuarioToken { get; set; }
-        DbSet<TokenDescargaArchivo> TokenDescargaArchivo { get; set; }
-        DbSet<Plaga> Plaga { get; set; }
-        DbSet<Enfermedad> Enfermedad { get; set; }
-        DbSet<Producto> Producto { get; set; }
-        DbSet<EtapaFenologica> EtapaFenologica { get; set; }
-        DbSet<ReporteEnfermedad> ReporteEnfermedad { get; set; }
-        DbSet<ReportePlaga> ReportePlaga { get; set; }
+        DbSet<User> User { get; set; }
+        DbSet<UserToken> UserToken { get; set; }
+        DbSet<ReasonSale> ReasonSale { get; set; }
+        DbSet<SaleUser> SaleUser { get; set; }
+        DbSet<Product> Product { get; set; }
+        DbSet<Store> Store { get; set; }
+        DbSet<Path> Path { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
         Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken);

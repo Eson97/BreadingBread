@@ -18,12 +18,12 @@ namespace BreadingBread.Application.UseCases.Usuarios.Commands.AproveUsuario
         public async Task<AproveUsuarioResponse> Handle(AproveUsuarioCommand request, CancellationToken cancellationToken)
         {
             var user = await db
-                        .Usuario
-                        .SingleOrDefaultAsync(el => el.NombreUsuario == request.NombreUsuario || el.Email == request.NombreUsuario);
+                        .User
+                        .SingleOrDefaultAsync(el => el.UserName == request.UserName);
             if (user != null)
             {
-                db.Usuario.Attach(user);
-                user.Confirmado = true;
+                db.User.Attach(user);
+                user.Aproved = true;
                 await db.SaveChangesAsync(cancellationToken);
             }
             return new AproveUsuarioResponse();

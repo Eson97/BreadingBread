@@ -40,28 +40,13 @@ namespace BreadingBread.Application.Infraestructure
                 {
                     //Solo Aministrador
                     case IAdminRequest<TRequest, TResponse> _:
-                        if (userAccessor.TipoUsuario != TiposUsuario.Admin)
+                        if (userAccessor.TipoUsuario != UserType.Admin)
                             failures.Add("No tienes permisos");
                         break;
                     //Administrador y Usuario tienen el permiso
                     case IUserRequest<TRequest, TResponse> _:
-                        if (userAccessor.TipoUsuario != TiposUsuario.User
-                            && userAccessor.TipoUsuario != TiposUsuario.Admin)
-                            failures.Add("No tienes permisos");
-                        break;
-                    //Todos excepto Productor tienen permiso
-                    case IVisor<TRequest, TResponse> _:
-                        if (userAccessor.TipoUsuario != TiposUsuario.Visor
-                            && userAccessor.TipoUsuario != TiposUsuario.User
-                            && userAccessor.TipoUsuario != TiposUsuario.Admin)
-                            failures.Add("No tienes permisos");
-                        break;
-                    //Administrador, Usuario, Productor y Visor tienen permiso
-                    case IProductorRequest<TRequest, TResponse> _:
-                        if (userAccessor.TipoUsuario != TiposUsuario.Productor
-                            && userAccessor.TipoUsuario != TiposUsuario.Visor
-                            && userAccessor.TipoUsuario != TiposUsuario.User
-                            && userAccessor.TipoUsuario != TiposUsuario.Admin)
+                        if (userAccessor.TipoUsuario != UserType.User
+                            && userAccessor.TipoUsuario != UserType.Admin)
                             failures.Add("No tienes permisos");
                         break;
                     //Cualquiera Authenticado puede acceder

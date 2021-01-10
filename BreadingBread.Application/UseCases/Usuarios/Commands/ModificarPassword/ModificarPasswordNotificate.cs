@@ -26,16 +26,15 @@ namespace BreadingBread.Application.UseCases.Usuarios.Commands.ModificarPassword
             public async Task Handle(ModificarPasswordNotificate notification, CancellationToken cancellationToken)
             {
                 var usuario = await db
-               .Usuario
+               .User
                .Select(el => new ModificarPasswordResponse
                {
-                   Email = el.Email
                })
-               .SingleOrDefaultAsync(el => el.Email == notification.Email, cancellationToken);
+               .SingleOrDefaultAsync(cancellationToken);
 
+                //TODO Delete email service 
                 await emailService.SendAsync(new Email
                 {
-                    To = usuario.Email,
                     Body = $"Se ha modificado la contraseña",
                     From = "AppIAS",
                     Subject = "Modificacion Exitosa"

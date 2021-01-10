@@ -17,10 +17,10 @@ namespace BreadingBread.Application.UseCases.Usuarios.Commands.InvalidaToken
 
         public async Task<InvalidaTokenResponse> Handle(InvalidaTokenCommand request, CancellationToken cancellationToken)
         {
-            var token = await db.UsuarioToken.SingleOrDefaultAsync(el => el.RefreshToken == request.RefreshToken);
+            var token = await db.UserToken.SingleOrDefaultAsync(el => el.RefreshToken == request.RefreshToken);
             if (token != null)
             {
-                db.UsuarioToken.Remove(token);
+                db.UserToken.Remove(token);
                 await db.SaveChangesAsync(cancellationToken);
             }
             return new InvalidaTokenResponse { };

@@ -27,10 +27,9 @@ namespace BreadingBread.Application.UseCases.Usuarios.Commands.CreateUsuario
 
             public async Task Handle(CreateUsuarioNotificate notification, CancellationToken cancellationToken)
             {
-                var usuario = await db.Usuario.FindAsync(notification.IdUsuario);
+                var usuario = await db.User.FindAsync(notification.IdUsuario);
                 await emailService.SendAsync(new Email
                 {
-                    To = usuario.Email,
                     Body = $"Su usuario ha sido registrado, acceda al siguiente link para <a href='{settings.AppUrl}/cuenta/confirmar?token={usuario.TokenConfirmacion}'>confirmar</a>, de lo contrario puede ignorar el email.",
                     From = "AppIAS",
                     Subject = "Registro Completo",

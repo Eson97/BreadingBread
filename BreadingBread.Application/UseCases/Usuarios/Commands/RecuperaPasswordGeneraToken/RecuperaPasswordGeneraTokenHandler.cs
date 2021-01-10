@@ -23,8 +23,8 @@ namespace BreadingBread.Application.UseCases.Usuarios.Commands.RecuperaPasswordG
         public async Task<RecuperaPasswordGeneraTokenResponse> Handle(RecuperaPasswordGeneraTokenCommand request, CancellationToken cancellationToken)
         {
             var usuario = await db
-                .Usuario
-                .SingleOrDefaultAsync(el => el.Email == request.Email);
+                .User
+                .SingleOrDefaultAsync(el => el.UserName == request.UserName);
 
             if (usuario != null)
             {
@@ -33,7 +33,7 @@ namespace BreadingBread.Application.UseCases.Usuarios.Commands.RecuperaPasswordG
 
                 await mediator.Publish(new RecuperaPasswordGeneraTokenNotificate
                 {
-                    Email = request.Email,
+                    Email = request.UserName,
                     Token = token
                 }, cancellationToken);
 

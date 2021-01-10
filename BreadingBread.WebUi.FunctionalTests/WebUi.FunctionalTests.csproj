@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BreadingBreadWebUi\WebUi.csproj" />
+    <ProjectReference Include="..\BreadingBread.WebUi\WebUi.csproj" />
   </ItemGroup>
 
 </Project>

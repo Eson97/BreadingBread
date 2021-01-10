@@ -11,19 +11,19 @@ namespace BreadingBread.Infraestructure
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             // Add configuration
-            services.Configure<EmailServiceOptions>(configuration.GetSection("EmailService"));
-            services.Configure<FileServiceOptions>(configuration.GetSection("FileService"));
-            services.Configure<AvatarServiceOptions>(configuration.GetSection("AvatarService"));
+            //services.Configure<EmailServiceOptions>(configuration.GetSection("EmailService"));
+            //services.Configure<FileServiceOptions>(configuration.GetSection("FileService"));
+            //services.Configure<AvatarServiceOptions>(configuration.GetSection("AvatarService"));
 
             // Add framework services.
-            services.AddSingleton<IEmailService, EmailService>();
-            services.AddSingleton<IPushNotificationService, PushNotificationService>();
             services.AddSingleton<IDateTime, MachineDateTime>();
             services.AddSingleton<IRandomGenerator, RandomGenerator>();
             services.AddSingleton<IFileService, FileService>();
             services.AddSingleton<IHtmlSanitizer, HtmlSanitizer>();
-            services.AddSingleton<IAvatarService, AvatarService>();
 
+            //services.AddSingleton<IAvatarService, AvatarService>();
+            //services.AddSingleton<IEmailService, EmailService>();
+            //services.AddSingleton<IPushNotificationService, PushNotificationService>();
             return services;
         }
     }

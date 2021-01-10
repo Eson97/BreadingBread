@@ -22,8 +22,8 @@ namespace BreadingBread.Application.UseCases.Usuarios.Commands.RefreshCredential
         public async Task<RefreshCredentialsResponse> Handle(RefreshCredentialsCommand request, CancellationToken cancellationToken)
         {
             var token = await db
-                .UsuarioToken
-                .Include(el => el.UsuarioNavigation)
+                .UserToken
+                .Include(el => el.UserNavigation)
                 .SingleOrDefaultAsync(el => el.RefreshToken == request.RefreshToken);
 
             if (token == null)
@@ -37,11 +37,10 @@ namespace BreadingBread.Application.UseCases.Usuarios.Commands.RefreshCredential
 
             return new RefreshCredentialsResponse
             {
-                Email = token.UsuarioNavigation.Email,
-                IdUsuario = token.IdUsuario,
-                NombreUsuario = token.UsuarioNavigation.NombreUsuario,
+                IdUsuario = token.IdUser,
+                UserName = token.UserNavigation.UserName,
                 RefreshToken = token.RefreshToken,
-                TipoUsuario = token.UsuarioNavigation.TipoUsuario
+                UserType = token.UserNavigation.UserType
             };
         }
     }

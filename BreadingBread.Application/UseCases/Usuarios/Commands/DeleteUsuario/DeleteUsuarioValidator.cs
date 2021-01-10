@@ -15,7 +15,7 @@ namespace BreadingBread.Application.UseCases.Usuarios.Commands.DeleteUsuario
 
         public DeleteUsuarioValidator(IBreadingBreadDbContext db)
         {
-            RuleFor(el => el.NombreUsuario).Matches("^[a-zA-Z]+(?:[_-]?[a-zA-Z0-9])*$").MaximumLength(20).NotEmpty();
+            RuleFor(el => el.UserName).Matches("^[a-zA-Z]+(?:[_-]?[a-zA-Z0-9])*$").MaximumLength(20).NotEmpty();
             this.db = db;
         }
         public override async Task<ValidationResult> ValidateAsync(ValidationContext<DeleteUsuarioCommand> context, CancellationToken cancellation = default)
@@ -24,12 +24,12 @@ namespace BreadingBread.Application.UseCases.Usuarios.Commands.DeleteUsuario
             var result = new ValidationResult();
 
             var entity = await db
-                .Usuario
-                .SingleOrDefaultAsync(el => el.NombreUsuario == request.NombreUsuario || el.Email == request.NombreUsuario);
+                .User
+                .SingleOrDefaultAsync(el => el.UserName == request.UserName);
 
             if (entity == null)
             {
-                throw new NotFoundException(nameof(Usuario), request.NombreUsuario);
+                throw new NotFoundException(nameof(User), request.UserName);
             }
 
             return result;

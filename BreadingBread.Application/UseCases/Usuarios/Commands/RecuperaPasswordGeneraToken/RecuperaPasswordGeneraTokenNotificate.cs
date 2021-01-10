@@ -28,7 +28,6 @@ namespace BreadingBread.Application.UseCases.Usuarios.Commands.RecuperaPasswordG
             {
                 await emailService.SendAsync(new Email
                 {
-                    To = notification.Email,
                     Body = $"Si olvido su Contraseña acceda al siguiente link para <a href='{options.AppUrl}/cuenta/recuperar-password?token={notification.Token}'>confirmar</a>, de lo contrario puede ignorar el email.",
                     From = "AppIAS",
                     Subject = "Solicitud de Recuperación de Contraseña",

@@ -26,26 +26,26 @@ namespace BreadingBread.Application.UseCases.Usuarios.Queries.GetUsuarioLogin
         public async Task<GetUsuarioLoginResponse> Handle(GetUsuarioLoginQuery request, CancellationToken cancellationToken)
         {
             var entity = await db
-                .Usuario
-                .SingleOrDefaultAsync(el => el.NombreUsuario == request.NombreUsuario || el.Email == request.NombreUsuario);
+                .User
+                .SingleOrDefaultAsync(el => el.UserName == request.UserName);
 
             if (entity == null)
             {
-                throw new NotFoundException(nameof(Usuario), request.NombreUsuario);
+                throw new NotFoundException(nameof(User), request.UserName);
             }
 
             if (PasswordStorage.VerifyPassword(request.Password, entity.HashedPassword))
             {
-                if (!entity.Confirmado)
+                if (!entity.Aproved)
                 {
                     throw new ForbiddenException("La cuenta no ha sido aprobada por el administrador");
                 }
 
                 string randomToken = randomGenerator.SecureRandomString(32);
 
-                db.UsuarioToken.Add(new UsuarioToken
+                db.UserToken.Add(new UserToken
                 {
-                    IdUsuario = entity.Id,
+                    IdUser = entity.Id,
                     RefreshToken = randomToken
                 });
                 entity.AccessFailedCount = 0;
@@ -54,10 +54,9 @@ namespace BreadingBread.Application.UseCases.Usuarios.Queries.GetUsuarioLogin
 
                 return new GetUsuarioLoginResponse
                 {
-                    Email = entity.Email,
-                    NombreUsuario = entity.NombreUsuario,
+                    UserName = entity.UserName,
                     IdUsuario = entity.Id,
-                    TipoUsuario = entity.TipoUsuario,
+                    UserType = entity.UserType,
                     RefreshToken = randomToken
                 };
             }
@@ -70,7 +69,7 @@ namespace BreadingBread.Application.UseCases.Usuarios.Queries.GetUsuarioLogin
                 }
                 await db.SaveChangesAsync(cancellationToken);
 
-                throw new NotFoundException(nameof(Usuario), request.NombreUsuario);
+                throw new NotFoundException(nameof(User), request.UserName);
             }
         }
     }

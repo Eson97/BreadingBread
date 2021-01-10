@@ -20,7 +20,7 @@ namespace BreadingBread.Application.Tests.Usuarios.Commands
             // Act
             var result = sut.Handle(new RecuperaPasswordGeneraTokenCommand
             {
-                Email = email
+                UserName = email
             }, CancellationToken.None);
 
             // Assert
@@ -38,7 +38,7 @@ namespace BreadingBread.Application.Tests.Usuarios.Commands
             // Act
             var result = sut.Handle(new RecuperaPasswordGeneraTokenCommand
             {
-                Email = email
+                UserName = email
             }, CancellationToken.None);
 
             // Assert

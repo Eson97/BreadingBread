@@ -28,42 +28,28 @@ namespace BreadingBread.Application.UseCases.Usuarios.Commands.CreateUsuario
         {
             string pass = PasswordStorage.CreateHash(request.Password);
 
-            var user = new Usuario
+            var user = new User
             {
-                Email = request.Email,
-                NombreUsuario = request.NombreUsuario,
+                UserName = request.UserName,
                 HashedPassword = pass,
-                TipoUsuario = (TiposUsuario)request.TipoUsuario,
-                Confirmado = false,
-                FechaRegistro = dateTime.Now,
+                UserType = (UserType)request.UserType,
+                Aproved = false,
                 TokenConfirmacion = randomGenerator.Guid(),
-                ApellidoMaterno = request.ApellidoMaterno,
-                ApellidoPaterno = request.ApellidoPaterno,
-                Nombre = request.Nombre,
-                NormalizedEmail = request.Email.ToUpper(),
-                NormalizedUserName = request.NombreUsuario.ToUpper()
+                Name = request.Name,
+                NormalizedUserName = request.UserName.ToUpper()
             };
-            db.Usuario.Add(user);
+            db.User.Add(user);
 
             await db.SaveChangesAsync(cancellationToken);
 
             string mensaje = "Usuario Creado, espere a que el Administrador Confirme su Cuenta";
 
-            //if (user.TipoUsuario == Domain.Enums.TiposUsuario.Alumno)
-            //{
-            //    mensaje = "Usuario Creado, revise su correo para poder Acceder por primera vez";
-            //    await mediator.Publish(new CreateUsuarioNotificate { IdUsuario = user.Id }, cancellationToken);
-            //}
-
             return new CreateUsuarioResponse
             {
                 Id = user.Id,
-                Email = user.Email,
-                NombreUsuario = user.NombreUsuario,
+                NombreUsuario = user.UserName,
                 NotificationMessage = mensaje,
-                ApellidoMaterno = user.ApellidoMaterno,
-                ApellidoPaterno = user.ApellidoPaterno,
-                Nombre = user.Nombre
+                Nombre = user.Name
             };
         }
     }

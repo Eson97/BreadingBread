@@ -18,22 +18,19 @@ namespace BreadingBread.Application.UseCases.Usuarios.Queries.GetUsuarioDetail
 
         public async Task<GetUsuarioDetailResponse> Handle(GetUsuarioDetailQuery request, CancellationToken cancellationToken)
         {
-            var entity = await db.Usuario.FindAsync(request.IdUsuario);
+            var entity = await db.User.FindAsync(request.IdUsuario);
 
             if (entity == null)
             {
-                throw new NotFoundException(nameof(Usuario), request.IdUsuario);
+                throw new NotFoundException(nameof(User), request.IdUsuario);
             }
 
             return new GetUsuarioDetailResponse
             {
-                Email = entity.Email,
-                TipoUsuario = entity.TipoUsuario,
+                TipoUsuario = entity.UserType,
                 IdUsuario = entity.Id,
-                NombreUsuario = entity.NombreUsuario,
-                Nombre = entity.Nombre,
-                ApellidoPaterno = entity.ApellidoPaterno,
-                ApellidoMaterno = entity.ApellidoMaterno
+                NombreUsuario = entity.UserName,
+                Nombre = entity.Name,
             };
         }
     }

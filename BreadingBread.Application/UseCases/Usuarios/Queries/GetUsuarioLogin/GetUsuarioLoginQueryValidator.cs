@@ -17,7 +17,7 @@ namespace BreadingBread.Application.UseCases.Usuarios.Queries.GetUsuarioLogin
 
         public GetUsuarioLoginQueryValidator(IBreadingBreadDbContext db, IDateTime dateTime)
         {
-            RuleFor(el => el.NombreUsuario).NotEmpty();
+            RuleFor(el => el.UserName).NotEmpty();
             RuleFor(el => el.Password).NotEmpty();
             this.db = db;
             this.dateTime = dateTime;
@@ -29,12 +29,12 @@ namespace BreadingBread.Application.UseCases.Usuarios.Queries.GetUsuarioLogin
             var result = new ValidationResult();
 
             var entity = await db
-                .Usuario
-                .SingleOrDefaultAsync(el => el.NombreUsuario == request.NombreUsuario || el.Email == request.NombreUsuario);
+                .User
+                .SingleOrDefaultAsync(el => el.UserName == request.UserName);
 
             if (entity == null)
             {
-                throw new NotFoundException(nameof(Usuario), request.NombreUsuario);
+                throw new NotFoundException(nameof(User), request.UserName);
             }
 
             // Comprobar el tiempo para desbloquear la cuenta

@@ -6,7 +6,7 @@ namespace BreadingBread.Application.UseCases.Usuarios.Commands.RecuperaPasswordG
     {
         public RecuperaPasswordGeneraTokenValidator()
         {
-            RuleFor(el => el.Email).EmailAddress();
+            RuleFor(el => el.UserName).EmailAddress();
         }
     }
 }

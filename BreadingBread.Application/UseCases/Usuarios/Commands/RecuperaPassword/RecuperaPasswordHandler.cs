@@ -21,10 +21,10 @@ namespace BreadingBread.Application.UseCases.Usuarios.Commands.RecuperaPassword
         public async Task<RecuperaPasswordResponse> Handle(RecuperaPasswordCommand request, CancellationToken cancellationToken)
         {
             var usuario = await db
-                .Usuario
+                .User
                 .SingleOrDefaultAsync(el => el.TokenConfirmacion == request.Token);
 
-            if (usuario == null) throw new NotFoundException(nameof(Usuario), new { });
+            if (usuario == null) throw new NotFoundException(nameof(User), new { });
 
             string pass = PasswordStorage.CreateHash(request.Password);
 

@@ -17,8 +17,8 @@ namespace BreadingBread.Application.Tests.Infraestructure
             var context = new BreadingBreadDbContext(options, new MachineDateTime());
 
             context.Database.EnsureCreated();
-            context.Usuario.AddRange(new[] {
-                new Usuario { Id = 1, NombreUsuario = "Admin", TipoUsuario = Domain.Enums.TiposUsuario.Admin, Email = "asd@asd.com"},
+            context.User.AddRange(new[] {
+                new User { Id = 1, UserName = "Admin", UserType = Domain.Enums.UserType.Admin},
             });
 
             context.SaveChanges();

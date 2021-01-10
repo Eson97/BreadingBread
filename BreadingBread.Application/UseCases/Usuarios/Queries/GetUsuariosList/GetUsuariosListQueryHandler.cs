@@ -19,19 +19,16 @@ namespace BreadingBread.Application.UseCases.Usuarios.Queries.GetUsuariosList
         public async Task<GetUsuariosListResponse> Handle(GetUsuariosListQuery request, CancellationToken cancellationToken)
         {
             var usuarios = await db
-                .Usuario
+                .User
                 .Select(el => new UsuarioLookupModel
                 {
                     Id = el.Id,
-                    NombreUsuario = el.NombreUsuario,
-                    Email = el.Email,
-                    Nombre = el.Nombre,
-                    ApellidoPaterno = el.ApellidoPaterno,
-                    ApellidoMaterno = el.ApellidoMaterno,
-                    TipoUsuario = el.TipoUsuario,
-                    Confirmado = el.Confirmado,
+                    UserName = el.UserName,
+                    Name = el.Name,
+                    UserType = el.UserType,
+                    Aproved = el.Aproved,
                 })
-                .OrderBy(el => el.Confirmado)
+                .OrderBy(el => el.Aproved)
                 .ToListAsync(cancellationToken);
 
             return new GetUsuariosListResponse { Usuarios = usuarios };

@@ -7,7 +7,7 @@ namespace BreadingBread.Application.UseCases.Usuarios.Commands.ModificarDatosUsu
         public ModificarDatosUsuarioValidator()
         {
             RuleFor(el => el.IdUsuario).NotEmpty().GreaterThan(0);
-            RuleFor(el => el.Nombre).MaximumLength(20).NotEmpty();
+            RuleFor(el => el.Name).MaximumLength(20).NotEmpty();
             RuleFor(el => el.ApellidoPaterno).MaximumLength(20).NotEmpty();
             RuleFor(el => el.ApellidoMaterno).MaximumLength(20).NotEmpty();
         }
