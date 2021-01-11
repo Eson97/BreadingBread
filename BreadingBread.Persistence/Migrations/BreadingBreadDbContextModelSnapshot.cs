@@ -32,7 +32,7 @@ namespace BreadingBread.Persistence.Migrations
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("IdUser")
+                    b.Property<int?>("IdUser")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsDeleted")
@@ -52,7 +52,8 @@ namespace BreadingBread.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("IdUser")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[IdUser] IS NOT NULL");
 
                     b.ToTable("Path");
                 });
@@ -329,9 +330,7 @@ namespace BreadingBread.Persistence.Migrations
                 {
                     b.HasOne("BreadingBread.Domain.Entities.User", "CurrentUser")
                         .WithOne("Path")
-                        .HasForeignKey("BreadingBread.Domain.Entities.Path", "IdUser")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BreadingBread.Domain.Entities.Path", "IdUser");
                 });
 
             modelBuilder.Entity("BreadingBread.Domain.Entities.ReasonSale", b =>

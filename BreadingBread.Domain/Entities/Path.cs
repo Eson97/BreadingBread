@@ -13,7 +13,7 @@ namespace BreadingBread.Domain.Entities
         public bool Selected { get; set; }
 
 
-        public int IdUser { get; set; }
+        public int? IdUser { get; set; }
         public virtual User CurrentUser { get; set; }
         public virtual ICollection<Store> Stores { get; set; }
     }

@@ -60,7 +60,7 @@ namespace BreadingBread.Persistence.Migrations
                     DeletedDate = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(nullable: false),
                     Selected = table.Column<bool>(nullable: false),
-                    IdUser = table.Column<int>(nullable: false)
+                    IdUser = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -70,7 +70,7 @@ namespace BreadingBread.Persistence.Migrations
                         column: x => x.IdUser,
                         principalTable: "User",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -209,7 +209,8 @@ namespace BreadingBread.Persistence.Migrations
                 name: "IX_Path_IdUser",
                 table: "Path",
                 column: "IdUser",
-                unique: true);
+                unique: true,
+                filter: "[IdUser] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ReasonSale_IdSaleUser",
