@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BreadingBread.Application.UseCases.Usuarios.Commands.CreateUsuario
 {
-    public class CreateUsuarioHandler : IRequestHandler<CreateUsuarioCommand, CreateUsuarioResponse>
+    public class CreateUsuarioHandler : IRequestHandler<CreateUserCommand, CreateUsuarioResponse>
     {
         private readonly IMediator mediator;
         private readonly IBreadingBreadDbContext db;
@@ -24,7 +24,7 @@ namespace BreadingBread.Application.UseCases.Usuarios.Commands.CreateUsuario
             this.randomGenerator = randomGenerator;
         }
 
-        public async Task<CreateUsuarioResponse> Handle(CreateUsuarioCommand request, CancellationToken cancellationToken)
+        public async Task<CreateUsuarioResponse> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
             string pass = PasswordStorage.CreateHash(request.Password);
 
@@ -47,9 +47,9 @@ namespace BreadingBread.Application.UseCases.Usuarios.Commands.CreateUsuario
             return new CreateUsuarioResponse
             {
                 Id = user.Id,
-                NombreUsuario = user.UserName,
+                UserName = user.UserName,
                 NotificationMessage = mensaje,
-                Nombre = user.Name
+                Name = user.Name
             };
         }
     }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BreadingBread.Application.UseCases.Usuarios.Queries.GetUsuarioLogin
 {
-    public class GetUsuarioLoginHandler : IRequestHandler<GetUsuarioLoginQuery, GetUsuarioLoginResponse>
+    public class GetUsuarioLoginHandler : IRequestHandler<GetUserLoginQuery, GetUsuarioLoginResponse>
     {
         private readonly IBreadingBreadDbContext db;
         private readonly IDateTime dateTime;
@@ -23,7 +23,7 @@ namespace BreadingBread.Application.UseCases.Usuarios.Queries.GetUsuarioLogin
             this.randomGenerator = randomGenerator;
         }
 
-        public async Task<GetUsuarioLoginResponse> Handle(GetUsuarioLoginQuery request, CancellationToken cancellationToken)
+        public async Task<GetUsuarioLoginResponse> Handle(GetUserLoginQuery request, CancellationToken cancellationToken)
         {
             var entity = await db
                 .User

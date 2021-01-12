@@ -32,7 +32,7 @@ namespace BreadingBread.WebUi.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult<IngresarResponse>> Ingresar([FromBody] GetUsuarioLoginQuery query)
+        public async Task<ActionResult<IngresarResponse>> Ingresar([FromBody] GetUserLoginQuery query)
         {
             var response = await Mediator.Send(query);
             // authentication successful so generate jwt token
@@ -162,7 +162,7 @@ namespace BreadingBread.WebUi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<CreateUsuarioResponse>> CreateUser([FromBody] CreateUsuarioCommand command)
+        public async Task<ActionResult<CreateUsuarioResponse>> CreateUser([FromBody] CreateUserCommand command)
         {
             return Ok(await Mediator.Send(command));
         }

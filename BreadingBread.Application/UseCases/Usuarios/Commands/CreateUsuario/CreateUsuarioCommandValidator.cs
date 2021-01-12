@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BreadingBread.Application.UseCases.Usuarios.Commands.CreateUsuario
 {
-    public class CreateUsuarioCommandValidator : AbstractValidator<CreateUsuarioCommand>
+    public class CreateUsuarioCommandValidator : AbstractValidator<CreateUserCommand>
     {
         private readonly IBreadingBreadDbContext db;
 
@@ -20,7 +20,7 @@ namespace BreadingBread.Application.UseCases.Usuarios.Commands.CreateUsuario
             RuleFor(el => el.Name).MaximumLength(20).NotEmpty();
         }
 
-        public override async Task<FluentValidation.Results.ValidationResult> ValidateAsync(ValidationContext<CreateUsuarioCommand> context, CancellationToken cancellation = default)
+        public override async Task<FluentValidation.Results.ValidationResult> ValidateAsync(ValidationContext<CreateUserCommand> context, CancellationToken cancellation = default)
         {
             var result = new FluentValidation.Results.ValidationResult();
             var entity = context.InstanceToValidate;

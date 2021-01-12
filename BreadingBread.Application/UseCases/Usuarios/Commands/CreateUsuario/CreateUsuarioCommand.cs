@@ -2,7 +2,7 @@
 
 namespace BreadingBread.Application.UseCases.Usuarios.Commands.CreateUsuario
 {
-    public class CreateUsuarioCommand : IRequest<CreateUsuarioResponse>
+    public class CreateUserCommand : IRequest<CreateUsuarioResponse>
     {
         public string UserName { get; set; }
         public string Password { get; set; }

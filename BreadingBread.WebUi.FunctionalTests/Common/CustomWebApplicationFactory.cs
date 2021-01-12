@@ -129,7 +129,7 @@ namespace BreadingBread.WebUi.FunctionalTests.Common
 
         private async Task<string> GetAccessTokenAsync(HttpClient client, string userName, string password)
         {
-            string content = JsonConvert.SerializeObject(new GetUsuarioLoginQuery
+            string content = JsonConvert.SerializeObject(new GetUserLoginQuery
             {
                 UserName = userName,
                 Password = password

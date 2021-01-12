@@ -30,7 +30,7 @@ namespace BreadingBread.WebUi
             Log.Logger = new LoggerConfiguration()
                 .Destructure.ByMaskingProperties(opts =>
                 {
-                    opts.PropertyNames.Add(nameof(CreateUsuarioCommand.Password));
+                    opts.PropertyNames.Add(nameof(CreateUserCommand.Password));
                     opts.PropertyNames.Add(nameof(ModificarPasswordCommand.PasswordActual));
                     opts.PropertyNames.Add(nameof(ModificarPasswordCommand.PasswordNuevo));
                     opts.PropertyNames.Add(nameof(RefreshCredentialsCommand.RefreshToken));

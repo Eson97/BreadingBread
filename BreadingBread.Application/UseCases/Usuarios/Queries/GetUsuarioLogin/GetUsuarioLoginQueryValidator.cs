@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BreadingBread.Application.UseCases.Usuarios.Queries.GetUsuarioLogin
 {
-    public class GetUsuarioLoginQueryValidator : AbstractValidator<GetUsuarioLoginQuery>
+    public class GetUsuarioLoginQueryValidator : AbstractValidator<GetUserLoginQuery>
     {
         private readonly IBreadingBreadDbContext db;
         private readonly IDateTime dateTime;
@@ -23,7 +23,7 @@ namespace BreadingBread.Application.UseCases.Usuarios.Queries.GetUsuarioLogin
             this.dateTime = dateTime;
         }
 
-        public override async Task<ValidationResult> ValidateAsync(ValidationContext<GetUsuarioLoginQuery> context, CancellationToken cancellation = default)
+        public override async Task<ValidationResult> ValidateAsync(ValidationContext<GetUserLoginQuery> context, CancellationToken cancellation = default)
         {
             var request = context.InstanceToValidate;
             var result = new ValidationResult();
