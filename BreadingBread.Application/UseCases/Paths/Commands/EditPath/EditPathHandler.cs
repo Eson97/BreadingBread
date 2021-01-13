@@ -25,7 +25,7 @@ namespace BreadingBread.Application.UseCases.Paths.Commands.EditPath
         {
             var newPathName = new Path
             {
-                Id = request.ID,
+                Id = request.Id,
                 Name = request.Name
             };
 

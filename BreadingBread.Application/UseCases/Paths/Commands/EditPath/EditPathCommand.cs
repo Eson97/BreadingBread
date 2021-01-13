@@ -7,7 +7,7 @@ namespace BreadingBread.Application.UseCases.Paths.Commands.EditPath
 {
     public class EditPathCommand : IRequest<EditPathResponse>
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
     }
 }

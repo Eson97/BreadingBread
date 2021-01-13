@@ -10,7 +10,7 @@ namespace BreadingBread.Application.UseCases.Paths.Commands.EditPath
         public EditPathValidator()
         {
             RuleFor(el => el.Name).NotEmpty().MaximumLength(20);
-            RuleFor(el => el.ID).NotEmpty();
+            RuleFor(el => el.Id).NotEmpty();
         }
     }
 }
