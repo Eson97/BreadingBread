@@ -10,29 +10,28 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BreadingBread.Application.UseCases.Paths.Commands.EditPath
+namespace BreadingBread.Application.UseCases.Paths.Commands.DeletePath
 {
-    public class EditPathHandler : IRequestHandler<EditPathCommand, EditPathResponse>
+    public class DeletePathHandler : IRequestHandler<DeletePathCommand, DeletePathResponse>
     {
         private readonly IBreadingBreadDbContext db;
 
-        public EditPathHandler(IBreadingBreadDbContext db)
+        public DeletePathHandler(IBreadingBreadDbContext db)
         {
             this.db = db;
         }
 
-        public async Task<EditPathResponse> Handle(EditPathCommand request, CancellationToken cancellationToken)
+        public async Task<DeletePathResponse> Handle(DeletePathCommand request, CancellationToken cancellationToken)
         {
-            var pathToEdit = await db.Path.FindAsync(request.Id);
+            var pathToDelete = await db.Path.FindAsync(request.Id);
 
-            if (pathToEdit == null)
+            if (pathToDelete == null)
                 throw new NotFoundException(nameof(Path), request.Id);
 
-            pathToEdit.Name = request.Name;
-
+            db.Path.Remove(pathToDelete);
             await db.SaveChangesAsync(cancellationToken);
-            
-            return new EditPathResponse();
+
+            return new DeletePathResponse();
         }
     }
 }

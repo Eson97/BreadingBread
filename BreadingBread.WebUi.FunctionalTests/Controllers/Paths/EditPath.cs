@@ -20,11 +20,11 @@ namespace BreadingBread.WebUi.FunctionalTests.Controllers.Paths
             var pet = new EditPathCommand
             {
                 Id = 1,
-                Name = "new Path to add"
+                Name = "newPathName"
             };
 
             var content = Utilities.GetRequestContent(pet);
-            var response = await client.PutAsync("/api/Path/Edit", content);
+            var response = await client.PostAsync("/api/Path/Edit", content);
 
             response.EnsureSuccessStatusCode();
 
@@ -40,11 +40,12 @@ namespace BreadingBread.WebUi.FunctionalTests.Controllers.Paths
 
             var pet = new EditPathCommand
             {
-                Name = "new Path to add bastante grande al parecer y no funciona"
+                Id = 2,
+                Name = "a new path name with a name lenght no valid "
             };
 
             var content = Utilities.GetRequestContent(pet);
-            var response = await client.PostAsync("/api/Path/Add", content);
+            var response = await client.PostAsync("/api/Path/Edit", content);
 
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
         }
@@ -57,11 +58,11 @@ namespace BreadingBread.WebUi.FunctionalTests.Controllers.Paths
             var pet = new EditPathCommand
             {
                 Id = 1,
-                Name = "Name to edit"
+                Name = "newPathName"
             };
 
             var content = Utilities.GetRequestContent(pet);
-            var response = await client.PutAsync("/api/Path/Edit", content);
+            var response = await client.PostAsync("/api/Path/Edit", content);
 
             Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
         }
@@ -78,24 +79,7 @@ namespace BreadingBread.WebUi.FunctionalTests.Controllers.Paths
             };
 
             var content = Utilities.GetRequestContent(pet);
-            var response = await client.PutAsync("/api/Path/Edit", content);
-
-            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
-        }
-
-        [Fact]
-        public async Task EditPathByUserNotFound()
-        {
-            var client = await GetUserClientAsync();
-
-            var pet = new EditPathCommand
-            {
-                Id = 7777,
-                Name = "Name to edit"
-            };
-
-            var content = Utilities.GetRequestContent(pet);
-            var response = await client.PutAsync("/api/Path/Edit", content);
+            var response = await client.PostAsync("/api/Path/Edit", content);
 
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
         }
