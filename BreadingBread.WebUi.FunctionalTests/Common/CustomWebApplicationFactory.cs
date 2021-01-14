@@ -138,7 +138,7 @@ namespace BreadingBread.WebUi.FunctionalTests.Common
             using (var response = await client.PostAsync("/api/cuenta/ingresar", new StringContent(content, Encoding.UTF8, "application/json")))
             {
                 string responseString = await response.Content.ReadAsStringAsync();
-                var result = JsonConvert.DeserializeObject<WebUi.Controllers.AcountController.IngresarResponse>(responseString);
+                var result = JsonConvert.DeserializeObject<WebUi.Controllers.CuentaController.IngresarResponse>(responseString);
                 if (result.Token == null)
                 {
                     throw new Exception("No se encontro el usuario, db necesita seed");
