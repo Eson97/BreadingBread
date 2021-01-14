@@ -18,11 +18,9 @@ namespace BreadingBread.WebUi.FunctionalTests.Controllers.Paths
         {
             var client = await GetAdminClientAsync();
 
-            //deberia de agregar uno antes?
-
             var pet = new DeletePathCommand
             {
-                Id = 1,
+                Id = 1
             };
 
             var content = Utilities.GetRequestContent(pet);
@@ -56,11 +54,9 @@ namespace BreadingBread.WebUi.FunctionalTests.Controllers.Paths
         {
             var client = await GetUserClientAsync();
 
-            //Deberia de agregar uno antes?
-
             var pet = new EditPathCommand
             {
-                Id = 1,
+                Id = 1
             };
 
             var content = Utilities.GetRequestContent(pet);
@@ -76,7 +72,7 @@ namespace BreadingBread.WebUi.FunctionalTests.Controllers.Paths
 
             var pet = new EditPathCommand
             {
-                Id = 7777,
+                Id = 7777
             };
 
             var content = Utilities.GetRequestContent(pet);

@@ -17,10 +17,10 @@ namespace BreadingBread.Persistence.Configurations
             .IsUnicode(true);
 
             builder.Property(el => el.Lat)
-            .IsRequired();
+                .IsRequired(false);
 
             builder.Property(el => el.Long)
-            .IsRequired();
+                .IsRequired(false);
 
             builder.HasOne(el => el.Path)
                 .WithMany(el => el.Stores)

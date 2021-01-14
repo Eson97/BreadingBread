@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BreadingBread.Persistence.Migrations
 {
     [DbContext(typeof(BreadingBreadDbContext))]
-    [Migration("20210111161523_Initial")]
+    [Migration("20210114002436_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -214,10 +214,10 @@ namespace BreadingBread.Persistence.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<double>("Lat")
+                    b.Property<double?>("Lat")
                         .HasColumnType("float");
 
-                    b.Property<double>("Long")
+                    b.Property<double?>("Long")
                         .HasColumnType("float");
 
                     b.Property<DateTime?>("Modified")

@@ -10,8 +10,8 @@ namespace BreadingBread.Domain.Entities
         }
 
         public string Name { get; set; }
-        public double Lat { get; set; }
-        public double Long { get; set; }
+        public double? Lat { get; set; }
+        public double? Long { get; set; }
 
 
         public int IdPath { get; set; }

@@ -212,10 +212,10 @@ namespace BreadingBread.Persistence.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<double>("Lat")
+                    b.Property<double?>("Lat")
                         .HasColumnType("float");
 
-                    b.Property<double>("Long")
+                    b.Property<double?>("Long")
                         .HasColumnType("float");
 
                     b.Property<DateTime?>("Modified")

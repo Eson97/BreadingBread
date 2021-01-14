@@ -106,8 +106,8 @@ namespace BreadingBread.Persistence.Migrations
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedDate = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(nullable: false),
-                    Lat = table.Column<double>(nullable: false),
-                    Long = table.Column<double>(nullable: false),
+                    Lat = table.Column<double>(nullable: true),
+                    Long = table.Column<double>(nullable: true),
                     IdPath = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
