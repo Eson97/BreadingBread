@@ -29,7 +29,7 @@ namespace BreadingBread.Application.UseCases.Stores.Queries.GetListStores
 
             }).OrderBy(el => el.Name).ToListAsync(cancellationToken);
 
-            return new GetListStoresResponse { Paths = entity };
+            return new GetListStoresResponse { Stores = entity };
         }
     }
 }
