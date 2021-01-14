@@ -1,5 +1,6 @@
 using BreadingBread.Application.Exceptions;
 using BreadingBread.Application.Interfaces;
+using BreadingBread.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -22,7 +23,15 @@ namespace BreadingBread.Application.UseCases.Stores.Commands.DeleteStore
 
         public async Task<DeleteStoreResponse> Handle(DeleteStoreCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var storeToDelete = await db.Store.FindAsync(request.Id);
+
+            if (storeToDelete == null)
+                throw new NotFoundException(nameof(Store), request.Id);
+
+            db.Store.Remove(storeToDelete);
+            await db.SaveChangesAsync(cancellationToken);
+
+            return new DeleteStoreResponse();
         }
     }
 }

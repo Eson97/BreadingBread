@@ -11,13 +11,8 @@ namespace BreadingBread.Application.UseCases.Stores.Commands.EditStore
 {
     public class EditStoreAuth : IAdminRequest<EditStoreCommand, EditStoreResponse>
     {
-        private readonly IBreadingBreadDbContext db;
-        private readonly IUserAccessor currentUser;
-
         public EditStoreAuth(IBreadingBreadDbContext db, IUserAccessor currentUser)
         {
-            this.db = db;
-            this.currentUser = currentUser;
         }
         
         public Task Validate(EditStoreCommand request, ValidationResult validationResult)

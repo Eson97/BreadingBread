@@ -11,13 +11,8 @@ namespace BreadingBread.Application.UseCases.Stores.Commands.DeleteStore
 {
     public class DeleteStoreAuth : IAdminRequest<DeleteStoreCommand, DeleteStoreResponse>
     {
-        private readonly IBreadingBreadDbContext db;
-        private readonly IUserAccessor currentUser;
-
         public DeleteStoreAuth(IBreadingBreadDbContext db, IUserAccessor currentUser)
         {
-            this.db = db;
-            this.currentUser = currentUser;
         }
         
         public Task Validate(DeleteStoreCommand request, ValidationResult validationResult)

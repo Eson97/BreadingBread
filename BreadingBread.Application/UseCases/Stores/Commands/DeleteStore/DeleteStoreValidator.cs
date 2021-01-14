@@ -9,7 +9,7 @@ namespace BreadingBread.Application.UseCases.Stores.Commands.DeleteStore
     {
         public DeleteStoreValidator()
         {
-            
+            RuleFor(el => el.Id).NotEmpty();
         }
     }
 }

@@ -22,7 +22,14 @@ namespace BreadingBread.Application.UseCases.Stores.Queries.GetListStores
 
         public async Task<GetListStoresResponse> Handle(GetListStoresQuery request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var entity = await db.Store.Where(el => !el.IsDeleted).Select(el => new StoreModel
+            {
+                Id = el.Id,
+                Name = el.Name
+
+            }).OrderBy(el => el.Name).ToListAsync(cancellationToken);
+
+            return new GetListStoresResponse { Paths = entity };
         }
     }
 }
