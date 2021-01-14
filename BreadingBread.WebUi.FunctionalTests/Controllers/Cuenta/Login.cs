@@ -5,7 +5,7 @@ using BreadingBread.Application.UseCases.Usuarios.Queries.GetUsuarioLogin;
 using BreadingBread.Application.UseCases.Usuarios.Commands.CreateUsuario;
 using BreadingBread.Domain.Enums;
 using System.Net;
-using static BreadingBread.WebUi.Controllers.CuentaController;
+using static BreadingBread.WebUi.Controllers.AcountController;
 
 namespace BreadingBread.WebUi.FunctionalTests.Controllers.Cuenta
 {

@@ -21,11 +21,11 @@ using System.Threading.Tasks;
 namespace BreadingBread.WebUi.Controllers
 {
     [AllowAnonymous]
-    public class CuentaController : BaseController
+    public class AcountController : BaseController
     {
         private readonly AuthOptions authOptions;
 
-        public CuentaController(IOptions<AuthOptions> options)
+        public AcountController(IOptions<AuthOptions> options)
         {
             this.authOptions = options.Value;
         }

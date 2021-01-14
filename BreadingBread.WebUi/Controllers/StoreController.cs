@@ -1,4 +1,5 @@
-﻿using BreadingBread.Application.UseCases.Stores.Queries.GetListStores;
+﻿using BreadingBread.Application.UseCases.Stores.Commands.SetCoor;
+using BreadingBread.Application.UseCases.Stores.Queries.GetListStores;
 using BreadingBread.Application.UseCases.Stores.Queries.GetListStoresByPath;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +13,13 @@ namespace BreadingBread.WebUi.Controllers
         public StoreController()
         {
         }
+
+        [HttpPost]
+        public async Task<ActionResult<SetCoorResponse>> SetCoordinates([FromBody] SetCoorCommand command)
+        {
+            return Ok(await Mediator.Send(command));
+        }
+
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
