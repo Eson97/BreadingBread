@@ -1,4 +1,6 @@
-﻿using BreadingBread.Application.UseCases.Stores.Commands.SetCoor;
+﻿using BreadingBread.Application.UseCases.Stores.Commands.AddStore;
+using BreadingBread.Application.UseCases.Stores.Commands.DeleteStore;
+using BreadingBread.Application.UseCases.Stores.Commands.SetCoor;
 using BreadingBread.Application.UseCases.Stores.Queries.GetListStores;
 using BreadingBread.Application.UseCases.Stores.Queries.GetListStoresByPath;
 using Microsoft.AspNetCore.Http;
@@ -12,6 +14,18 @@ namespace BreadingBread.WebUi.Controllers
     {
         public StoreController()
         {
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<AddStoreResponse>> Add([FromBody] AddStoreCommand command)
+        {
+            return Ok(await Mediator.Send(command));
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<DeleteStoreResponse>> Delete([FromBody] DeleteStoreCommand command)
+        {
+            return Ok(await Mediator.Send(command));
         }
 
         [HttpPost]

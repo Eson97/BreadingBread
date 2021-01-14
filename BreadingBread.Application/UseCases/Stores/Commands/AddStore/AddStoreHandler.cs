@@ -23,11 +23,16 @@ namespace BreadingBread.Application.UseCases.Stores.Commands.AddStore
 
         public async Task<AddStoreResponse> Handle(AddStoreCommand request, CancellationToken cancellationToken)
         {
+            var pathExist = await db.Path.AnyAsync(el => el.Id == request.IdPath);
+
+            if(!pathExist)
+                throw new NotFoundException(nameof(Path), request.IdPath);
+
             var newStore = new Store
             {
                 Name = request.Name,
                 IdPath = request.IdPath,
-                IsDeleted = false
+                IsDeleted = false,
             };
 
             db.Store.Add(newStore);
