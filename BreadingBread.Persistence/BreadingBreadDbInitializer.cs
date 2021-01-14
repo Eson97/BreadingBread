@@ -88,22 +88,22 @@ namespace BreadingBread.Persistence
                 new Product
                 {
                     Name="Pan grande bolillo mamalon",
-                    Prize=15
+                    Price=15
                 },
                 new Product
                 {
                     Name="Bolillo chico",
-                    Prize=5
+                    Price=5
                 },
                 new Product
                 {
                     Name="Concha",
-                    Prize=6
+                    Price=6
                 },
                 new Product
                 {
                     Name="Gollete",
-                    Prize=10
+                    Price=10
                 },
             };
 

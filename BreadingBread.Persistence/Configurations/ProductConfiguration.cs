@@ -15,7 +15,7 @@ namespace BreadingBread.Persistence.Configurations
              .IsRequired()
              .IsUnicode(true);
 
-            builder.Property(el => el.Prize)
+            builder.Property(el => el.Price)
              .IsRequired();
         }
     }

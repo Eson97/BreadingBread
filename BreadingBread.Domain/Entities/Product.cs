@@ -9,7 +9,7 @@ namespace BreadingBread.Domain.Entities
             SaleProducts = new HashSet<SaleProduct>();
         }
         public string Name { get; set; }
-        public decimal Prize { get; set; }
+        public decimal Price { get; set; }
 
         public virtual ICollection<SaleProduct> SaleProducts { get; set; }
     }
