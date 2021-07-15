@@ -20,7 +20,7 @@ namespace BreadingBread.Persistence.Configurations
             builder.Property(el => el.Cantity)
                 .IsRequired();
 
-            builder.Property(el => el.Prize)
+            builder.Property(el => el.Price)
                 .IsRequired();
 
             builder.HasOne(el => el.Product)

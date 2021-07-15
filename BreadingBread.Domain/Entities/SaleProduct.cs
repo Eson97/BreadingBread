@@ -8,7 +8,7 @@ namespace BreadingBread.Domain.Entities
         {
         }
         public int Cantity { get; set; }
-        public decimal Prize { get; set; }
+        public decimal Price { get; set; }
 
         public int IdSaleUser { get; set; }
         public int IdProduct { get; set; }

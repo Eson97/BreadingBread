@@ -82,7 +82,7 @@ namespace BreadingBread.Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .IsUnicode(true);
 
-                    b.Property<decimal>("Prize")
+                    b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
@@ -147,7 +147,7 @@ namespace BreadingBread.Persistence.Migrations
                     b.Property<DateTime?>("Modified")
                         .HasColumnType("datetime2");
 
-                    b.Property<decimal>("Prize")
+                    b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");

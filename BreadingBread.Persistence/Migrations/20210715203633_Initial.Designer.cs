@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BreadingBread.Persistence.Migrations
 {
     [DbContext(typeof(BreadingBreadDbContext))]
-    [Migration("20210114002436_Initial")]
+    [Migration("20210715203633_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -84,7 +84,7 @@ namespace BreadingBread.Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .IsUnicode(true);
 
-                    b.Property<decimal>("Prize")
+                    b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
@@ -149,7 +149,7 @@ namespace BreadingBread.Persistence.Migrations
                     b.Property<DateTime?>("Modified")
                         .HasColumnType("datetime2");
 
-                    b.Property<decimal>("Prize")
+                    b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");

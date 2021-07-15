@@ -18,7 +18,7 @@ namespace BreadingBread.Persistence.Migrations
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedDate = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(nullable: false),
-                    Prize = table.Column<decimal>(nullable: false)
+                    Price = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -184,7 +184,7 @@ namespace BreadingBread.Persistence.Migrations
                     Created = table.Column<DateTime>(nullable: false),
                     Modified = table.Column<DateTime>(nullable: true),
                     Cantity = table.Column<int>(nullable: false),
-                    Prize = table.Column<decimal>(nullable: false),
+                    Price = table.Column<decimal>(nullable: false),
                     IdSaleUser = table.Column<int>(nullable: false),
                     IdProduct = table.Column<int>(nullable: false)
                 },
