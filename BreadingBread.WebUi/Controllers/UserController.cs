@@ -1,4 +1,6 @@
-﻿using BreadingBread.Application.UseCases.Usuarios.Queries.GetUsuariosList;
+﻿using BreadingBread.Application.UseCases.Usuarios.Commands.AproveUsuario;
+using BreadingBread.Application.UseCases.Usuarios.Commands.DeleteUsuario;
+using BreadingBread.Application.UseCases.Usuarios.Queries.GetUsuariosList;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -17,6 +19,18 @@ namespace BreadingBread.WebUi.Controllers
         {
             return Ok(await Mediator.Send(new GetUsuariosListQuery()));
 
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<AproveUsuarioResponse>> Aprove([FromBody] AproveUsuarioCommand command)
+        {
+            return Ok(await Mediator.Send(command));
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<DeleteUsuarioResponse>> Delete([FromBody] DeleteUsuarioCommand command)
+        {
+            return Ok(await Mediator.Send(command));
         }
     }
 }
