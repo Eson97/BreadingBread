@@ -13,6 +13,7 @@ namespace BreadingBread.Application.Interfaces
         DbSet<Product> Product { get; set; }
         DbSet<Store> Store { get; set; }
         DbSet<Path> Path { get; set; }
+        DbSet<Promotion> Promotion { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
         Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken);

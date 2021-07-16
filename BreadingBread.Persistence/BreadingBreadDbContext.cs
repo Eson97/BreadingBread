@@ -32,6 +32,7 @@ namespace BreadingBread.Persistence
         public DbSet<Product> Product { get; set; }
         public DbSet<Store> Store { get; set; }
         public DbSet<Path> Path { get; set; }
+        public DbSet<Promotion> Promotion { get; set; }
 
 
         public Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken)
