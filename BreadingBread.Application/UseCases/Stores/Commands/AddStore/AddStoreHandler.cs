@@ -25,13 +25,12 @@ namespace BreadingBread.Application.UseCases.Stores.Commands.AddStore
         {
             var pathExist = await db.Path.AnyAsync(el => el.Id == request.IdPath);
 
-            if(!pathExist)
+            if (!pathExist)
                 throw new NotFoundException(nameof(Path), request.IdPath);
 
             var newStore = new Store
             {
                 Name = request.Name,
-                IdPath = request.IdPath,
                 IsDeleted = false,
             };
 

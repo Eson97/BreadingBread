@@ -6,16 +6,13 @@ namespace BreadingBread.Domain.Entities
     {
         public Store()
         {
-            Sales = new HashSet<SaleUser>();
+            Paths = new HashSet<PathStore>();
         }
 
         public string Name { get; set; }
         public double? Lat { get; set; }
         public double? Long { get; set; }
 
-
-        public int IdPath { get; set; }
-        public virtual Path Path { get; set; }
-        public virtual ICollection<SaleUser> Sales { get; set; }
+        public virtual ICollection<PathStore> Paths { get; set; }
     }
 }

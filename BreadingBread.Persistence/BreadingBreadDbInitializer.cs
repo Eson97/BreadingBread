@@ -33,19 +33,14 @@ namespace BreadingBread.Persistence
                 new Store
                 {
                     Name="La Esquinita",
-                    IdPath=1,
-
                 },
                 new Store
                 {
                     Name="El atoron",
-                    IdPath=1,
-
                 },
                 new Store
                 {
                     Name="La tienda de don juan",
-                    IdPath=1,
                 },
             };
 

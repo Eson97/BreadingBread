@@ -10,8 +10,6 @@ namespace BreadingBread.Application.Interfaces
     {
         DbSet<User> User { get; set; }
         DbSet<UserToken> UserToken { get; set; }
-        DbSet<ReasonSale> ReasonSale { get; set; }
-        DbSet<SaleUser> SaleUser { get; set; }
         DbSet<Product> Product { get; set; }
         DbSet<Store> Store { get; set; }
         DbSet<Path> Path { get; set; }

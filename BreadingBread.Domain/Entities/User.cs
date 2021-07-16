@@ -9,7 +9,7 @@ namespace BreadingBread.Domain.Entities
         public User()
         {
             UserTokens = new HashSet<UserToken>();
-            Sales = new HashSet<SaleUser>();
+            UserSales = new HashSet<UserSale>();
         }
 
         public string UserName { get; set; }
@@ -24,6 +24,6 @@ namespace BreadingBread.Domain.Entities
 
         public virtual Path Path { get; set; }
         public virtual ICollection<UserToken> UserTokens { get; set; }
-        public virtual ICollection<SaleUser> Sales { get; set; }
+        public virtual ICollection<UserSale> UserSales { get; set; }
     }
 }

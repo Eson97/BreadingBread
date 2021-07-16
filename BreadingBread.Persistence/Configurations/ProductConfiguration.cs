@@ -17,6 +17,10 @@ namespace BreadingBread.Persistence.Configurations
 
             builder.Property(el => el.Price)
              .IsRequired();
+
+            builder.HasMany(el => el.Promotions)
+                .WithOne(el => el.Product)
+                .HasForeignKey(el => el.IdProducto);
         }
     }
 }

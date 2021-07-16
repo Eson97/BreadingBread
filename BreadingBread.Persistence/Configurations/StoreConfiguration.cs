@@ -10,8 +10,6 @@ namespace BreadingBread.Persistence.Configurations
         {
             builder.HasKey(el => el.Id);
 
-            builder.HasIndex(el => el.IdPath);
-
             builder.Property(el => el.Name)
             .IsRequired()
             .IsUnicode(true);
@@ -21,10 +19,6 @@ namespace BreadingBread.Persistence.Configurations
 
             builder.Property(el => el.Long)
                 .IsRequired(false);
-
-            builder.HasOne(el => el.Path)
-                .WithMany(el => el.Stores)
-                .HasForeignKey(el => el.IdPath);
         }
     }
 }

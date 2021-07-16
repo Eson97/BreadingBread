@@ -18,7 +18,7 @@ namespace BreadingBread.Application.UseCases.Stores.Queries.GetListStoresByPath
 
         public async Task<GetListStoresByPathResponse> Handle(GetListStoresByPathQuery request, CancellationToken cancellationToken)
         {
-            var entity = await db.Store.Where(el => !el.IsDeleted && el.IdPath == request.IdPath).Select(el => new StoreModelByPathId
+            var entity = await db.Store.Where(el => !el.IsDeleted).Select(el => new StoreModelByPathId
             {
                 Id = el.Id,
                 Name = el.Name

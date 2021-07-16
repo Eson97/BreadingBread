@@ -6,7 +6,8 @@ namespace BreadingBread.Domain.Entities
     {
         public Path()
         {
-            Stores = new HashSet<Store>();
+            UserSales = new HashSet<UserSale>();
+            PathStores = new HashSet<PathStore>();
         }
 
         public string Name { get; set; }
@@ -15,6 +16,7 @@ namespace BreadingBread.Domain.Entities
 
         public int? IdUser { get; set; }
         public virtual User CurrentUser { get; set; }
-        public virtual ICollection<Store> Stores { get; set; }
+        public virtual ICollection<UserSale> UserSales { get; set; }
+        public virtual ICollection<PathStore> PathStores { get; set; }
     }
 }
