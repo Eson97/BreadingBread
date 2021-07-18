@@ -6,7 +6,7 @@ namespace BreadingBread.Application.UseCases.UserPath.Commands.DeallocatePath
     {
         public DeallocatePathValidator()
         {
-            RuleFor(el => el.IdUserPath).NotEmpty().GreaterThanOrEqualTo(0)
+            RuleFor(el => el.IdUserPath).NotEmpty().GreaterThanOrEqualTo(0);
         }
     }
 }
