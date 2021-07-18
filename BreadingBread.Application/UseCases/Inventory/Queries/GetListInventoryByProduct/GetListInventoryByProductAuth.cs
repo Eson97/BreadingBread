@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace BreadingBread.Application.UseCases.Inventory.Queries.GetListInventoryByProduct
 {
-    public class GetListInventoryByProductAuth : IAuthenticatedRequest<GetListInventoryByProductQuery, GetListInventoryByProductResponse>
+    public class GetListInventoryByProductAuth : IUserRequest<GetListInventoryByProductQuery, GetListInventoryByProductResponse>
     {
         public GetListInventoryByProductAuth()
         {

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace BreadingBread.Application.UseCases.Inventory.Commands.DeleteProductoFromInventory
 {
-    public class DeleteProductoFromInventoryAuth : IAuthenticatedRequest<DeleteProductoFromInventoryCommand, DeleteProductoFromInventoryResponse>
+    public class DeleteProductoFromInventoryAuth : IUserRequest<DeleteProductoFromInventoryCommand, DeleteProductoFromInventoryResponse>
     {
         public DeleteProductoFromInventoryAuth()
         {

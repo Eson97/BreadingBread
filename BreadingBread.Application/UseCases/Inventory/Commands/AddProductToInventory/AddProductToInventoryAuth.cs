@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace BreadingBread.Application.UseCases.Inventory.Commands.AddProductToInventory
 {
-    public class AddProductToInventoryAuth : IAuthenticatedRequest<AddProductToInventoryCommand, AddProductToInventoryResponse>
+    public class AddProductToInventoryAuth : IUserRequest<AddProductToInventoryCommand, AddProductToInventoryResponse>
     {
         public AddProductToInventoryAuth()
         {
