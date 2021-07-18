@@ -18,14 +18,20 @@ namespace BreadingBread.Application.UseCases.Stores.Queries.GetListStoresByPath
 
         public async Task<GetListStoresByPathResponse> Handle(GetListStoresByPathQuery request, CancellationToken cancellationToken)
         {
-            var entity = await db.Store.Where(el => !el.IsDeleted).Select(el => new StoreModelByPathId
-            {
-                Id = el.Id,
-                Name = el.Name
+            //Obtiene la lista de tiendas por ruta donde ni la tienda ni la ruta no estan eliminadas
+            var stores = await (from ps in db.PathStore
+                                join s in db.Store
+                                on ps.IdStore equals s.Id
+                                where !ps.IsDeleted && !s.IsDeleted
+                                 && ps.IdPath == request.IdPath
+                                select new StoreModelByPathId
+                                {
+                                    Id = s.Id,
+                                    Name = s.Name
+                                }).OrderBy(el => el.Name)
+                               .ToListAsync(cancellationToken);
 
-            }).OrderBy(el => el.Name).ToListAsync(cancellationToken);
-
-            return new GetListStoresByPathResponse { Stores = entity };
+            return new GetListStoresByPathResponse { Stores = stores };
         }
     }
 }
