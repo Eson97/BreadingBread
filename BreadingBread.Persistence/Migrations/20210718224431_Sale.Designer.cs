@@ -4,14 +4,16 @@ using BreadingBread.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BreadingBread.Persistence.Migrations
 {
     [DbContext(typeof(BreadingBreadDbContext))]
-    partial class BreadingBreadDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210718224431_Sale")]
+    partial class Sale
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

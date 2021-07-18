@@ -5,6 +5,7 @@
         public ProductSale()
         {
         }
+        public int IdSale { get; set; }
         public int? IdPromo { get; set; }
         public int IdProduct { get; set; }
         public int Cantity { get; set; }

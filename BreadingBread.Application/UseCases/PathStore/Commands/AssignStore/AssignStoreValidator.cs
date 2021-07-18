@@ -6,8 +6,8 @@ namespace BreadingBread.Application.UseCases.PathStore.Commands.AssignStore
     {
         public AssignStoreValidator()
         {
-            RuleFor(el => el.IdPath).NotEmpty().GreaterThanOrEqualTo(0);
-            RuleFor(el => el.IdStore).NotEmpty().GreaterThanOrEqualTo(0);
+            RuleFor(el => el.IdPath).GreaterThan(0);
+            RuleFor(el => el.IdStore).GreaterThan(0);
         }
     }
 }

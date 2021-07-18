@@ -1,9 +1,6 @@
 ﻿using BreadingBread.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace BreadingBread.Persistence.Configurations
 {
@@ -12,6 +9,8 @@ namespace BreadingBread.Persistence.Configurations
         public void Configure(EntityTypeBuilder<ProductSale> builder)
         {
             builder.HasKey(el => el.Id);
+
+            builder.HasIndex(el => el.IdSale);
 
             builder.HasIndex(el => el.IdProduct);
 
@@ -36,6 +35,12 @@ namespace BreadingBread.Persistence.Configurations
             builder.HasOne(el => el.Product)
                 .WithMany(el => el.SaleProducts)
                 .HasForeignKey(el => el.IdProduct)
+                .IsRequired();
+
+            builder.HasOne(el => el.Sale)
+                .WithMany(el => el.Products)
+                .HasForeignKey(el => el.IdSale)
+                .OnDelete(DeleteBehavior.Cascade)
                 .IsRequired();
         }
     }

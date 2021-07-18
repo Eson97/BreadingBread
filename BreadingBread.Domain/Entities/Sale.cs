@@ -1,9 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace BreadingBread.Domain.Entities
 {
     public class Sale : BaseEntity
     {
+        public Sale()
+        {
+            Products = new HashSet<ProductSale>();
+        }
         public int IdUserSale { get; set; }
         public int IdStore { get; set; }
         public DateTime Visited { get; set; }
@@ -13,5 +18,6 @@ namespace BreadingBread.Domain.Entities
         public string Commentary { get; set; }
         public virtual Store StoreVisited { get; set; }
         public virtual UserSale UserSale { get; set; }
+        public virtual ICollection<ProductSale> Products { get; set; }
     }
 }
