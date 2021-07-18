@@ -27,13 +27,15 @@ namespace BreadingBread.Persistence
         public bool IsSoftDeleteFilterEnabled => false;
         public virtual DbSet<User> User { get; set; }
         public DbSet<UserToken> UserToken { get; set; }
-        //public DbSet<ReasonSale> ReasonSale { get; set; }
-        //public DbSet<SaleUser> SaleUser { get; set; }
         public DbSet<Product> Product { get; set; }
+        public DbSet<Promotion> Promotion { get; set; }
+        public DbSet<Inventory> Inventory { get; set; }
+        public DbSet<UserSale> UserSale { get; set; }
+        public DbSet<Sale> Sale { get; set; }
+        public DbSet<ProductSale> ProductSale { get; set; }
+        public DbSet<PathStore> PathStore { get; set; }
         public DbSet<Store> Store { get; set; }
         public DbSet<Path> Path { get; set; }
-        public DbSet<Promotion> Promotion { get; set; }
-
 
         public Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken)
         {

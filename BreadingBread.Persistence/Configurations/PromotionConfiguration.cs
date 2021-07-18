@@ -26,8 +26,9 @@ namespace BreadingBread.Persistence.Configurations
             builder.Property(el => el.Active)
                 .IsRequired();
 
-
-            //TODO add foreign key 'IdProducto' and check my shitty code above
+            builder.HasOne(el => el.Product)
+                .WithMany(el => el.Promotions)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
