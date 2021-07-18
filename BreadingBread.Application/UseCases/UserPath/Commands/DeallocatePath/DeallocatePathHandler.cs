@@ -23,9 +23,9 @@ namespace BreadingBread.Application.UseCases.UserPath.Commands.DeallocatePath
 
         public async Task<DeallocatePathResponse> Handle(DeallocatePathCommand request, CancellationToken cancellationToken)
         {
-            var currentPath = await db.UserSale.FindAsync(request.IdUserPath);
+            var currentPath = await db.UserSale.FindAsync(request.Id);
             if (currentPath == null)
-                throw new NotFoundException(nameof(UserSale), request.IdUserPath);
+                throw new NotFoundException(nameof(UserSale), request.Id);
             //TODO probar si al eliminar se eliminan la venta y el detalle de la venta
             db.UserSale.Remove(currentPath);
 
