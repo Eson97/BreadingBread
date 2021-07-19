@@ -26,6 +26,7 @@ namespace BreadingBread.Application.UseCases.Promotions.Queries.GetListPromotion
                 .Where(el => !el.IsDeleted && el.Active)
                 .Select(el => new PromotionModel
                 {
+                    IdPromo = el.Id,
                     IdProducto = el.IdProducto,
                     CantitySaleMin = el.CantitySaleMin,
                     SaleMin = el.SaleMin,
