@@ -23,7 +23,315 @@ namespace BreadingBread.Persistence
             SeedPaths(context);
             SeedStores(context);
             SeedProducts(context);
-            //TODO Add sales to seed
+            SeedInventory(context);
+            SeedPromotion(context);
+            SeedPathStore(context);
+            SeedUserSale(context);
+            SeedSale(context);
+            SeedSaleProduct(context);
+        }
+        private void SeedPathStore(BreadingBreadDbContext context)
+        {
+            var pathStores = new PathStore[]
+            {
+                new PathStore
+                {
+                    IdPath=1,
+                    IdStore=1
+                },
+                new PathStore
+                {
+                    IdPath=1,
+                    IdStore=2
+                },
+                new PathStore
+                {
+                    IdPath=1,
+                    IdStore=3
+                },
+                new PathStore
+                {
+                    IdPath=1,
+                    IdStore=4
+                },
+                new PathStore
+                {
+                    IdPath=2,
+                    IdStore=1
+                },
+                new PathStore
+                {
+                    IdPath=2,
+                    IdStore=2
+                },
+                new PathStore
+                {
+                    IdPath=3,
+                    IdStore=1
+                },
+
+            };
+
+            foreach (var pathStore in pathStores)
+            {
+                context.PathStore.Add(pathStore);
+                context.SaveChanges();
+            }
+        }
+
+
+        private void SeedSaleProduct(BreadingBreadDbContext context)
+        {
+            var productSale = new ProductSale[]
+            {
+                new ProductSale
+                {
+                    IdSale=1,
+                    IdProduct=1,
+                    Cantity=10,
+                    UnitPrice=3,
+                    Total=30
+                },
+                new ProductSale
+                {
+                    IdSale=1,
+                    IdProduct=2,
+                    Cantity=2,
+                    UnitPrice=10,
+                    Total=20,
+                },
+                new ProductSale
+                {
+                    IdSale=1,
+                    IdProduct=3,
+                    Cantity=10,
+                    UnitPrice=10,
+                    Total=30,
+                    IdPromo=1,
+                    ReturnCantity=2
+                },
+                new ProductSale
+                {
+                    IdSale=1,
+                    IdProduct=1,
+                    Cantity=10,
+                    UnitPrice=3,
+                    Total=9.9M,
+                    IdPromo=2,
+                    Discount=20.1M,
+                },
+                new ProductSale
+                {
+                    IdSale=2,
+                    IdProduct=1,
+                    Cantity=10,
+                    UnitPrice=3,
+                    Total=30
+                },
+                new ProductSale
+                {
+                    IdSale=3,
+                    IdProduct=1,
+                    Cantity=10,
+                    UnitPrice=3,
+                    Total=30
+                },
+
+            };
+
+            foreach (var sale in productSale)
+            {
+                context.ProductSale.Add(sale);
+                context.SaveChanges();
+            }
+        }
+
+        private void SeedSale(BreadingBreadDbContext context)
+        {
+            var sales = new Sale[]
+            {
+                new Sale
+                {
+                  IdUserSale=1,
+                  IdStore=1,
+                  Total=20,
+                  Visited=System.DateTime.Now,
+                  Lat=1.1223,
+                  Lon=-1223.22,
+                },
+                new Sale
+                {
+                  IdUserSale=1,
+                  IdStore=2,
+                  Total=30,
+                  Visited=System.DateTime.Now,
+                  Lat=1.1223,
+                  Lon=-1223.22,
+                },
+                new Sale
+                {
+                  IdUserSale=1,
+                  IdStore=3,
+                  Total=30,
+                  Visited=System.DateTime.Now,
+                  Lat=1.1223,
+                  Lon=-1223.22,
+                },
+                new Sale
+                {
+                  IdUserSale=2,
+                  IdStore=1,
+                  Total=20,
+                  Visited=System.DateTime.Now.AddDays(-1),
+                  Lat=1.1223,
+                  Lon=-1223.22,
+                },
+                new Sale
+                {
+                  IdUserSale=3,
+                  IdStore=2,
+                  Total=20,
+                  Visited=System.DateTime.Now.AddDays(-1),
+                  Lat=1.1223,
+                  Lon=-1223.22,
+                },
+            };
+
+            foreach (var sale in sales)
+            {
+                context.Sale.Add(sale);
+                context.SaveChanges();
+            }
+        }
+
+        private void SeedUserSale(BreadingBreadDbContext context)
+        {
+            var userSales = new UserSale[]
+            {
+                new UserSale
+                {
+                    IdPath=1,
+                    IdUser=1,
+                    Visited=System.DateTime.Now
+                },
+                new UserSale
+                {
+                    IdPath=1,
+                    IdUser=2,
+                    Visited=System.DateTime.Now.AddDays(-1)
+                },
+                new UserSale
+                {
+                    IdPath=1,
+                    IdUser=2,
+                    Visited=System.DateTime.Now.AddDays(-1)
+                },
+            };
+
+            foreach (var userSale in userSales)
+            {
+                context.UserSale.Add(userSale);
+                context.SaveChanges();
+            }
+        }
+
+        private void SeedPromotion(BreadingBreadDbContext context)
+        {
+            var promotions = new Promotion[]
+            {
+                new Promotion
+                {
+                    IdProducto=1,
+                    CantitySaleMin=10,
+                    CantityFree=1,
+                    Active=true
+                },
+                new Promotion
+                {
+                    IdProducto=2,
+                    CantitySaleMin=10,
+                    CantityFree=1,
+                    Active=false
+                },
+                new Promotion
+                {
+                    IdProducto=3,
+                    CantitySaleMin=10,
+                    Discount=10,
+                    Active=true
+                },
+                new Promotion
+                {
+                    IdProducto=4,
+                    SaleMin=300,
+                    Discount=10,
+                    Active=true
+                },
+                new Promotion
+                {
+                    IdProducto=5,
+                    SaleMin=300,
+                    CantityFree=2,
+                    Active=true
+                },
+
+            };
+
+            foreach (var promotion in promotions)
+            {
+                context.Promotion.Add(promotion);
+                context.SaveChanges();
+            }
+        }
+
+        private void SeedInventory(BreadingBreadDbContext context)
+        {
+            var inventories = new Inventory[]
+            {
+                new Inventory
+                {
+                    IdProduct=1,
+                    IdSaleUser=1,
+                    InitalCantity=100
+                },
+                new Inventory
+                {
+                    IdProduct=2,
+                    IdSaleUser=1,
+                    InitalCantity=100
+                },
+                new Inventory
+                {
+                    IdProduct=3,
+                    IdSaleUser=1,
+                    InitalCantity=100
+                },
+                new Inventory
+                {
+                    IdProduct=4,
+                    IdSaleUser=1,
+                    InitalCantity=100
+                },
+                new Inventory
+                {
+                    IdProduct=1,
+                    IdSaleUser=2,
+                    InitalCantity=100
+                },
+                new Inventory
+                {
+                    IdProduct=1,
+                    IdSaleUser=2,
+                    InitalCantity=100
+                },
+
+            };
+
+            foreach (var inventory in inventories)
+            {
+                context.Inventory.Add(inventory);
+                context.SaveChanges();
+            }
         }
 
         private void SeedStores(BreadingBreadDbContext context)
@@ -100,6 +408,16 @@ namespace BreadingBread.Persistence
                     Name="Gollete",
                     Price=10
                 },
+                new Product
+                {
+                    Name="Dona",
+                    Price=8
+                },
+                new Product
+                {
+                    Name="Panquesito",
+                    Price=7
+                },
             };
 
             foreach (var product in products)
@@ -108,7 +426,6 @@ namespace BreadingBread.Persistence
                 context.SaveChanges();
             }
         }
-
 
         private void SeedUsuario(BreadingBreadDbContext db)
         {

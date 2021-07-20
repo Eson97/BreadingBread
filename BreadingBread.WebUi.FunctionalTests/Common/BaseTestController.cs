@@ -29,6 +29,6 @@ namespace BreadingBread.WebUi.FunctionalTests.Common
         public async Task<HttpClient> GetUserClientAsync(Action<IServiceCollection> configuration = null)
         {
             return await factory.GetAuthenticatedClientAsync("User", "123", configuration);
-        }      
+        }
     }
 }
