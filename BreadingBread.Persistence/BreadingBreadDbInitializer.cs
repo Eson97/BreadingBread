@@ -51,11 +51,6 @@ namespace BreadingBread.Persistence
                 },
                 new PathStore
                 {
-                    IdPath=1,
-                    IdStore=4
-                },
-                new PathStore
-                {
                     IdPath=2,
                     IdStore=1
                 },
@@ -78,7 +73,6 @@ namespace BreadingBread.Persistence
                 context.SaveChanges();
             }
         }
-
 
         private void SeedSaleProduct(BreadingBreadDbContext context)
         {
@@ -158,6 +152,7 @@ namespace BreadingBread.Persistence
                   Visited=System.DateTime.Now,
                   Lat=1.1223,
                   Lon=-1223.22,
+                  Commentary=""
                 },
                 new Sale
                 {
@@ -167,6 +162,7 @@ namespace BreadingBread.Persistence
                   Visited=System.DateTime.Now,
                   Lat=1.1223,
                   Lon=-1223.22,
+                  Commentary=""
                 },
                 new Sale
                 {
@@ -176,6 +172,7 @@ namespace BreadingBread.Persistence
                   Visited=System.DateTime.Now,
                   Lat=1.1223,
                   Lon=-1223.22,
+                  Commentary=""
                 },
                 new Sale
                 {
@@ -185,6 +182,7 @@ namespace BreadingBread.Persistence
                   Visited=System.DateTime.Now.AddDays(-1),
                   Lat=1.1223,
                   Lon=-1223.22,
+                  Commentary=""
                 },
                 new Sale
                 {
@@ -194,6 +192,7 @@ namespace BreadingBread.Persistence
                   Visited=System.DateTime.Now.AddDays(-1),
                   Lat=1.1223,
                   Lon=-1223.22,
+                  Commentary=""
                 },
             };
 
