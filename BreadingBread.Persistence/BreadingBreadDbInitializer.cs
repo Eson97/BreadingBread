@@ -51,6 +51,16 @@ namespace BreadingBread.Persistence
                 },
                 new PathStore
                 {
+                    IdPath=1,
+                    IdStore=4
+                },
+                new PathStore
+                {
+                    IdPath=1,
+                    IdStore=5
+                },
+                new PathStore
+                {
                     IdPath=2,
                     IdStore=1
                 },
@@ -349,6 +359,22 @@ namespace BreadingBread.Persistence
                 {
                     Name="La tienda de don juan",
                 },
+                new Store
+                {
+                    Name="Don pancho",
+                },
+                new Store
+                {
+                    Name="Abuelito del Lson ",
+                },
+                new Store
+                {
+                    Name="Nieves la Miguel",
+                },
+                new Store
+                {
+                    Name="El cerro (casa de termy)",
+                },
             };
 
             foreach (var store in stores)
@@ -373,6 +399,18 @@ namespace BreadingBread.Persistence
                 new Path
                 {
                     Name="Ruta 3",
+                },
+                new Path
+                {
+                    Name="Ruta 4",
+                },
+                new Path
+                {
+                    Name="Ruta 5",
+                },
+                new Path
+                {
+                    Name="Ruta 6",
                 },
             };
 
