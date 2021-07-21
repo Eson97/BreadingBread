@@ -48,6 +48,59 @@ namespace BreadingBread.WebUi.FunctionalTests.Controllers.Inventory
         }
 
         [Fact]
+        public async Task AddInventoryProductNotExistBadRequest()
+        {
+            var client = await GetAdminClientAsync();
+
+            var pet = new AddProductToInventoryCommand
+            {
+                IdProduct = 7777,
+                IdSaleUser = 1,
+                InitialCantity = 0
+            };
+
+            var content = Utilities.GetRequestContent(pet);
+            var response = await client.PostAsync("/api/Inventory/Add", content);
+
+            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task AddInventoryUserSaleNotExistBadRequest()
+        {
+            var client = await GetAdminClientAsync();
+
+            var pet = new AddProductToInventoryCommand
+            {
+                IdProduct = 1,
+                IdSaleUser = 77777,
+                InitialCantity = 0
+            };
+
+            var content = Utilities.GetRequestContent(pet);
+            var response = await client.PostAsync("/api/Inventory/Add", content);
+
+            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task AddInventoryInitialCantityLessCeroBadRequest()
+        {
+            var client = await GetAdminClientAsync();
+
+            var pet = new AddProductToInventoryCommand
+            {
+                IdProduct = 1,
+                IdSaleUser = 1,
+            };
+
+            var content = Utilities.GetRequestContent(pet);
+            var response = await client.PostAsync("/api/Inventory/Add", content);
+
+            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+        }
+
+        [Fact]
         public async Task AddInventoryByUserSucessful()
         {
             var client = await GetUserClientAsync();
