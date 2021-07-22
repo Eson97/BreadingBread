@@ -2,11 +2,6 @@ using BreadingBread.Application.Exceptions;
 using BreadingBread.Application.Interfaces;
 using BreadingBread.Domain.Entities;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -26,7 +21,13 @@ namespace BreadingBread.Application.UseCases.UserPath.Commands.DeallocatePath
             var currentPath = await db.UserSale.FindAsync(request.Id);
             if (currentPath == null)
                 throw new NotFoundException(nameof(UserSale), request.Id);
+
+            var path = await db.Path.FindAsync(currentPath.IdPath);
+            if (path == null)
+                throw new NotFoundException("No se encuentra la ruta", currentPath.IdPath);
+
             //TODO probar si al eliminar se eliminan la venta y el detalle de la venta
+            path.Selected = false;
             db.UserSale.Remove(currentPath);
 
             await db.SaveChangesAsync(cancellationToken);
