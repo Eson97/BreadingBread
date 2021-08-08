@@ -10,7 +10,8 @@ namespace BreadingBread.Application.UseCases.Stores.Queries.GetListStoresByPath
     {
         public int Id { get; set; }
         public string Name { get; set; }
-
+        public double Lat { get; set; }
+        public double Lon { get; set; }
         public bool Visited { get; set; }
     }
 }

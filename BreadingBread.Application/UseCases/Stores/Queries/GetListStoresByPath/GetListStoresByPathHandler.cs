@@ -31,6 +31,8 @@ namespace BreadingBread.Application.UseCases.Stores.Queries.GetListStoresByPath
                                 {
                                     Id = s.Id,
                                     Name = s.Name,
+                                    Lat = s.Lat ?? 0,
+                                    Lon = s.Long ?? 0,
                                     //Si la tienda fue visitada hoy
                                     Visited = db.Sale.Any(el => el.IdStore == s.Id && el.Visited.Date == dateTime.Now.Date)
                                 }).OrderBy(el => el.Visited)
