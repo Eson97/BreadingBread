@@ -1,4 +1,5 @@
 using BreadingBread.Application.Interfaces;
+using BreadingBread.Common;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -10,10 +11,12 @@ namespace BreadingBread.Application.UseCases.Stores.Queries.GetListStoresByPath
     public class GetListStoresByPathHandler : IRequestHandler<GetListStoresByPathQuery, GetListStoresByPathResponse>
     {
         private readonly IBreadingBreadDbContext db;
+        private readonly IDateTime dateTime;
 
-        public GetListStoresByPathHandler(IBreadingBreadDbContext db)
+        public GetListStoresByPathHandler(IBreadingBreadDbContext db, IDateTime dateTime)
         {
             this.db = db;
+            this.dateTime = dateTime;
         }
 
         public async Task<GetListStoresByPathResponse> Handle(GetListStoresByPathQuery request, CancellationToken cancellationToken)
@@ -27,8 +30,11 @@ namespace BreadingBread.Application.UseCases.Stores.Queries.GetListStoresByPath
                                 select new StoreModelByPathId
                                 {
                                     Id = s.Id,
-                                    Name = s.Name
-                                }).OrderBy(el => el.Name)
+                                    Name = s.Name,
+                                    //Si la tienda fue visitada hoy
+                                    Visited = db.Sale.Any(el => el.IdStore == s.Id && el.Visited.Date == dateTime.Now.Date)
+                                }).OrderBy(el => el.Visited)
+                                .OrderBy(el => el.Name)
                                .ToListAsync(cancellationToken);
 
             return new GetListStoresByPathResponse { Stores = stores };

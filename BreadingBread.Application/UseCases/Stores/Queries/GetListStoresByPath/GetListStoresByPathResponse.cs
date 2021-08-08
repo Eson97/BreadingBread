@@ -11,5 +11,6 @@ namespace BreadingBread.Application.UseCases.Stores.Queries.GetListStoresByPath
         public int Id { get; set; }
         public string Name { get; set; }
 
+        public bool Visited { get; set; }
     }
 }
