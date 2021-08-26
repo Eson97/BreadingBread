@@ -427,13 +427,43 @@ namespace BreadingBread.Persistence
             {
                 new Product
                 {
-                    Name="Pan grande bolillo mamalon",
-                    Price=15
+                    Name="Baguette",
+                    Price=8
                 },
                 new Product
                 {
-                    Name="Bolillo chico",
-                    Price=5
+                    Name="Bolillo Ch.",
+                    Price=6
+                },
+                new Product
+                {
+                    Name="Cuerno",
+                    Price=7
+                },
+                new Product
+                {
+                    Name="Marihuano",
+                    Price=(decimal)10.5
+                },
+                new Product
+                {
+                    Name="Pellizco",
+                    Price=(decimal)9.5
+                },
+                new Product
+                {
+                    Name="Bolillo Gr.",
+                    Price=15
+                },
+                 new Product
+                {
+                    Name="Dona",
+                    Price=8
+                },
+                new Product
+                {
+                    Name="Pan grande bolillo mamalon",
+                    Price=15
                 },
                 new Product
                 {
@@ -444,11 +474,6 @@ namespace BreadingBread.Persistence
                 {
                     Name="Gollete",
                     Price=10
-                },
-                new Product
-                {
-                    Name="Dona",
-                    Price=8
                 },
                 new Product
                 {
