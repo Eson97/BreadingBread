@@ -1,6 +1,8 @@
 using BreadingBread.Application.Exceptions;
 using BreadingBread.Application.Interfaces;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -17,9 +19,12 @@ namespace BreadingBread.Application.UseCases.PathStore.Commands.DeallocateStore
 
         public async Task<DeallocateStoreResponse> Handle(DeallocateStoreCommand request, CancellationToken cancellationToken)
         {
-            var entity = await db.PathStore.FindAsync(request.Id, cancellationToken);
+            var entity = await db.PathStore
+                .Where(el => el.IdStore == request.IdStore && el.IdPath == request.IdPath)
+                .FirstOrDefaultAsync(cancellationToken);
+
             if (entity == null)
-                throw new NotFoundException(nameof(Domain.Entities.PathStore), request.Id);
+                throw new NotFoundException(nameof(Domain.Entities.PathStore), request.IdStore);
 
             db.PathStore.Remove(entity);
             await db.SaveChangesAsync(cancellationToken);

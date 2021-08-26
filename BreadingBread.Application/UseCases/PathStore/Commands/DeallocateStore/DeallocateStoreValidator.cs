@@ -6,7 +6,7 @@ namespace BreadingBread.Application.UseCases.PathStore.Commands.DeallocateStore
     {
         public DeallocateStoreValidator()
         {
-            RuleFor(el => el.Id).GreaterThan(0);
+            RuleFor(el => el.IdStore).GreaterThan(0);
         }
     }
 }
