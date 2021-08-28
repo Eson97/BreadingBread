@@ -37,7 +37,7 @@ namespace BreadingBread.Application.UseCases.UserPath.Commands.AssignPath
                 && el.Visited.Date == dateTime.Now.Date)
                 .FirstOrDefaultAsync();
 
-            if (currentUser.UserId == assigned.IdUser)
+            if (currentUser.UserId == assigned?.IdUser)
                 return new AssignPathResponse { Id = assigned.Id };
 
             if (assigned != null)

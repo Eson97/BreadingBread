@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace BreadingBread.Application.UseCases.Stores.Queries.GetListStores
 {
-    public class GetListStoresAuth : IAdminRequest<GetListStoresQuery, GetListStoresResponse>
+    public class GetListStoresAuth : IUserRequest<GetListStoresQuery, GetListStoresResponse>
     {
 
         public GetListStoresAuth()
