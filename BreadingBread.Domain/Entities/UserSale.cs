@@ -12,7 +12,8 @@ namespace BreadingBread.Domain.Entities
 
         public int IdUser { get; set; }
         public int IdPath { get; set; }
-        public DateTime Visited { get; set; }
+        public bool Visited { get; set; }
+        public DateTime VisitedDate { get; set; }
 
         public virtual User User { get; set; }
         public virtual Path Path { get; set; }

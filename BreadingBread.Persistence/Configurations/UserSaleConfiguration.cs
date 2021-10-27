@@ -14,7 +14,7 @@ namespace BreadingBread.Persistence.Configurations
 
             builder.HasIndex(el => el.IdUser);
 
-            builder.Property(el => el.Visited)
+            builder.Property(el => el.VisitedDate)
                 .IsRequired();
 
 

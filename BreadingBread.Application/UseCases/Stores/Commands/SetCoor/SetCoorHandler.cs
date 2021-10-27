@@ -23,10 +23,13 @@ namespace BreadingBread.Application.UseCases.Stores.Commands.SetCoor
             if (newStoreCoords == null)
                 throw new NotFoundException(nameof(Store), request.Id);
 
-            newStoreCoords.Lat = request.Lat;
-            newStoreCoords.Long = request.Long;
+            if (newStoreCoords.Lat == 0 && newStoreCoords.Long == 0)
+            {
+                newStoreCoords.Lat = request.Lat;
+                newStoreCoords.Long = request.Long;
 
-            await db.SaveChangesAsync(cancellationToken);
+                await db.SaveChangesAsync(cancellationToken);
+            }
 
             return new SetCoorResponse();
         }

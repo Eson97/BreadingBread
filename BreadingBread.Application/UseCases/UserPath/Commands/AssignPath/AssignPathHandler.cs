@@ -29,25 +29,29 @@ namespace BreadingBread.Application.UseCases.UserPath.Commands.AssignPath
             if (path == null)
                 throw new NotFoundException("No se encuentra la ruta", request.IdPath);
 
+            //Se retorna la ruta que no se completo
             var assigned = await
                 db.UserSale
-                .Where(el => el.IdPath == request.IdPath
-                || el.IdUser == request.IdUser
-                //Si la ruta fue visitada el mismo dia
-                && el.Visited.Date == dateTime.Now.Date)
+                .Where(el => !el.Visited &&
+                (el.IdPath == request.IdPath || el.IdUser == request.IdUser))
                 .FirstOrDefaultAsync();
 
-            if (currentUser.UserId == assigned?.IdUser)
+            //Si el usuario es el mismo al asignado ps se retorna la ruta
+            if (currentUser?.UserId == assigned?.IdUser)
                 return new AssignPathResponse { Id = assigned.Id };
 
+            //Si el usuario no es el mismo ps ya la tomo otro usuario
             if (assigned != null)
                 throw new BadRequestException("La ruta ya esta asignada");
 
+            //Si aun no se asigna la ruta a ningun usuario
+            //y el usuario actual no tiene ninguna ruta abierta ps se asigna
             var toAssign = new UserSale
             {
                 IdPath = request.IdPath,
                 IdUser = request.IdUser,
-                Visited = dateTime.Now
+                Visited = false,
+                VisitedDate = dateTime.Now
             };
 
             path.Selected = true;

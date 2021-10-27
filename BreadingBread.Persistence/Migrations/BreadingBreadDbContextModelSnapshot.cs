@@ -432,7 +432,10 @@ namespace BreadingBread.Persistence.Migrations
                     b.Property<DateTime?>("Modified")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("Visited")
+                    b.Property<bool>("Visited")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("VisitedDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");

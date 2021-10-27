@@ -26,6 +26,25 @@ namespace BreadingBread.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Store",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Modified = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedDate = table.Column<DateTime>(nullable: true),
+                    Name = table.Column<string>(nullable: false),
+                    Lat = table.Column<double>(nullable: true),
+                    Long = table.Column<double>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Store", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "User",
                 columns: table => new
                 {
@@ -46,6 +65,34 @@ namespace BreadingBread.Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_User", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Promotion",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Modified = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedDate = table.Column<DateTime>(nullable: true),
+                    IdProducto = table.Column<int>(nullable: false),
+                    CantitySaleMin = table.Column<int>(nullable: false),
+                    SaleMin = table.Column<decimal>(nullable: false),
+                    CantityFree = table.Column<int>(nullable: false),
+                    Discount = table.Column<int>(nullable: false),
+                    Active = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Promotion", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Promotion_Product_IdProducto",
+                        column: x => x.IdProducto,
+                        principalTable: "Product",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -96,7 +143,7 @@ namespace BreadingBread.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Store",
+                name: "PathStore",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -105,46 +152,51 @@ namespace BreadingBread.Persistence.Migrations
                     Modified = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedDate = table.Column<DateTime>(nullable: true),
-                    Name = table.Column<string>(nullable: false),
-                    Lat = table.Column<double>(nullable: true),
-                    Long = table.Column<double>(nullable: true),
-                    IdPath = table.Column<int>(nullable: false)
+                    IdPath = table.Column<int>(nullable: false),
+                    IdStore = table.Column<int>(nullable: false),
+                    Visited = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Store", x => x.Id);
+                    table.PrimaryKey("PK_PathStore", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Store_Path_IdPath",
+                        name: "FK_PathStore_Path_IdPath",
                         column: x => x.IdPath,
                         principalTable: "Path",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PathStore_Store_IdStore",
+                        column: x => x.IdStore,
+                        principalTable: "Store",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "SaleUser",
+                name: "UserSale",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Created = table.Column<DateTime>(nullable: false),
                     Modified = table.Column<DateTime>(nullable: true),
-                    Total = table.Column<decimal>(nullable: false),
-                    Wastage = table.Column<decimal>(nullable: false),
                     IdUser = table.Column<int>(nullable: false),
-                    IdStore = table.Column<int>(nullable: false)
+                    IdPath = table.Column<int>(nullable: false),
+                    Visited = table.Column<bool>(nullable: false),
+                    VisitedDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SaleUser", x => x.Id);
+                    table.PrimaryKey("PK_UserSale", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SaleUser_Store_IdStore",
-                        column: x => x.IdStore,
-                        principalTable: "Store",
+                        name: "FK_UserSale_Path_IdPath",
+                        column: x => x.IdPath,
+                        principalTable: "Path",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_SaleUser_User_IdUser",
+                        name: "FK_UserSale_User_IdUser",
                         column: x => x.IdUser,
                         principalTable: "User",
                         principalColumn: "Id",
@@ -152,58 +204,124 @@ namespace BreadingBread.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ReasonSale",
+                name: "Inventory",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Created = table.Column<DateTime>(nullable: false),
                     Modified = table.Column<DateTime>(nullable: true),
-                    Description = table.Column<string>(nullable: false),
-                    Lat = table.Column<double>(nullable: false),
-                    Long = table.Column<double>(nullable: false),
-                    IdSaleUser = table.Column<int>(nullable: false)
+                    IdSaleUser = table.Column<int>(nullable: false),
+                    IdProduct = table.Column<int>(nullable: false),
+                    InitalCantity = table.Column<int>(nullable: false),
+                    ProductId = table.Column<int>(nullable: true),
+                    UserSaleId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ReasonSale", x => x.Id);
+                    table.PrimaryKey("PK_Inventory", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ReasonSale_SaleUser_IdSaleUser",
-                        column: x => x.IdSaleUser,
-                        principalTable: "SaleUser",
+                        name: "FK_Inventory_Product_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Product",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Inventory_UserSale_UserSaleId",
+                        column: x => x.UserSaleId,
+                        principalTable: "UserSale",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "SaleProduct",
+                name: "Sale",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Created = table.Column<DateTime>(nullable: false),
                     Modified = table.Column<DateTime>(nullable: true),
-                    Cantity = table.Column<int>(nullable: false),
-                    Price = table.Column<decimal>(nullable: false),
-                    IdSaleUser = table.Column<int>(nullable: false),
-                    IdProduct = table.Column<int>(nullable: false)
+                    IdUserSale = table.Column<int>(nullable: false),
+                    IdStore = table.Column<int>(nullable: false),
+                    Visited = table.Column<DateTime>(nullable: false),
+                    Lat = table.Column<double>(nullable: false),
+                    Lon = table.Column<double>(nullable: false),
+                    Total = table.Column<decimal>(nullable: false),
+                    Commentary = table.Column<string>(nullable: false),
+                    StoreVisitedId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SaleProduct", x => x.Id);
+                    table.PrimaryKey("PK_Sale", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SaleProduct_Product_IdProduct",
+                        name: "FK_Sale_UserSale_IdUserSale",
+                        column: x => x.IdUserSale,
+                        principalTable: "UserSale",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Sale_Store_StoreVisitedId",
+                        column: x => x.StoreVisitedId,
+                        principalTable: "Store",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductSale",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Modified = table.Column<DateTime>(nullable: true),
+                    IdSale = table.Column<int>(nullable: false),
+                    IdPromo = table.Column<int>(nullable: true),
+                    IdProduct = table.Column<int>(nullable: false),
+                    Cantity = table.Column<int>(nullable: false),
+                    PromoCantity = table.Column<int>(nullable: false),
+                    ReturnCantity = table.Column<int>(nullable: false),
+                    Discount = table.Column<decimal>(nullable: false),
+                    UnitPrice = table.Column<decimal>(nullable: false),
+                    Total = table.Column<decimal>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductSale", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProductSale_Product_IdProduct",
                         column: x => x.IdProduct,
                         principalTable: "Product",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_SaleProduct_SaleUser_IdSaleUser",
-                        column: x => x.IdSaleUser,
-                        principalTable: "SaleUser",
+                        name: "FK_ProductSale_Sale_IdSale",
+                        column: x => x.IdSale,
+                        principalTable: "Sale",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Inventory_IdProduct",
+                table: "Inventory",
+                column: "IdProduct");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Inventory_IdSaleUser",
+                table: "Inventory",
+                column: "IdSaleUser");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Inventory_ProductId",
+                table: "Inventory",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Inventory_UserSaleId",
+                table: "Inventory",
+                column: "UserSaleId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Path_IdUser",
@@ -213,41 +331,60 @@ namespace BreadingBread.Persistence.Migrations
                 filter: "[IdUser] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ReasonSale_IdSaleUser",
-                table: "ReasonSale",
-                column: "IdSaleUser",
-                unique: true);
+                name: "IX_PathStore_IdPath",
+                table: "PathStore",
+                column: "IdPath");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SaleProduct_IdProduct",
-                table: "SaleProduct",
-                column: "IdProduct");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SaleProduct_IdSaleUser",
-                table: "SaleProduct",
-                column: "IdSaleUser");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SaleUser_IdStore",
-                table: "SaleUser",
+                name: "IX_PathStore_IdStore",
+                table: "PathStore",
                 column: "IdStore");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SaleUser_IdUser",
-                table: "SaleUser",
-                column: "IdUser");
+                name: "IX_ProductSale_IdProduct",
+                table: "ProductSale",
+                column: "IdProduct");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Store_IdPath",
-                table: "Store",
-                column: "IdPath");
+                name: "IX_ProductSale_IdSale",
+                table: "ProductSale",
+                column: "IdSale");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Promotion_IdProducto",
+                table: "Promotion",
+                column: "IdProducto");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Sale_IdStore",
+                table: "Sale",
+                column: "IdStore");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Sale_IdUserSale",
+                table: "Sale",
+                column: "IdUserSale");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Sale_StoreVisitedId",
+                table: "Sale",
+                column: "StoreVisitedId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_User_UserName",
                 table: "User",
                 column: "UserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserSale_IdPath",
+                table: "UserSale",
+                column: "IdPath");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserSale_IdUser",
+                table: "UserSale",
+                column: "IdUser");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserToken_IdUser",
@@ -264,19 +401,28 @@ namespace BreadingBread.Persistence.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ReasonSale");
+                name: "Inventory");
 
             migrationBuilder.DropTable(
-                name: "SaleProduct");
+                name: "PathStore");
+
+            migrationBuilder.DropTable(
+                name: "ProductSale");
+
+            migrationBuilder.DropTable(
+                name: "Promotion");
 
             migrationBuilder.DropTable(
                 name: "UserToken");
 
             migrationBuilder.DropTable(
+                name: "Sale");
+
+            migrationBuilder.DropTable(
                 name: "Product");
 
             migrationBuilder.DropTable(
-                name: "SaleUser");
+                name: "UserSale");
 
             migrationBuilder.DropTable(
                 name: "Store");

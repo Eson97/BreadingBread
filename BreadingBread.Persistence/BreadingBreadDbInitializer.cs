@@ -221,19 +221,22 @@ namespace BreadingBread.Persistence
                 {
                     IdPath=1,
                     IdUser=1,
-                    Visited=System.DateTime.Now
+                    Visited=false,
+                    VisitedDate=System.DateTime.Now
                 },
                 new UserSale
                 {
                     IdPath=1,
                     IdUser=2,
-                    Visited=System.DateTime.Now.AddDays(-1)
+                    Visited=false,
+                    VisitedDate=System.DateTime.Now.AddDays(-1)
                 },
                 new UserSale
                 {
                     IdPath=1,
                     IdUser=2,
-                    Visited=System.DateTime.Now.AddDays(-1)
+                    Visited=true,
+                    VisitedDate=System.DateTime.Now.AddDays(-1)
                 },
             };
 

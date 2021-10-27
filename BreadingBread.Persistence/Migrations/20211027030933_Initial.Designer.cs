@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BreadingBread.Persistence.Migrations
 {
     [DbContext(typeof(BreadingBreadDbContext))]
-    [Migration("20210718151256_Sales")]
-    partial class Sales
+    [Migration("20211027030933_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -193,6 +193,9 @@ namespace BreadingBread.Persistence.Migrations
                     b.Property<int?>("IdPromo")
                         .HasColumnType("int");
 
+                    b.Property<int>("IdSale")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("Modified")
                         .HasColumnType("datetime2");
 
@@ -200,9 +203,6 @@ namespace BreadingBread.Persistence.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("ReturnCantity")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SaleId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Total")
@@ -215,7 +215,7 @@ namespace BreadingBread.Persistence.Migrations
 
                     b.HasIndex("IdProduct");
 
-                    b.HasIndex("SaleId");
+                    b.HasIndex("IdSale");
 
                     b.ToTable("ProductSale");
                 });
@@ -434,7 +434,10 @@ namespace BreadingBread.Persistence.Migrations
                     b.Property<DateTime?>("Modified")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("Visited")
+                    b.Property<bool>("Visited")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("VisitedDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -520,8 +523,10 @@ namespace BreadingBread.Persistence.Migrations
                         .IsRequired();
 
                     b.HasOne("BreadingBread.Domain.Entities.Sale", "Sale")
-                        .WithMany()
-                        .HasForeignKey("SaleId");
+                        .WithMany("Products")
+                        .HasForeignKey("IdSale")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("BreadingBread.Domain.Entities.Promotion", b =>

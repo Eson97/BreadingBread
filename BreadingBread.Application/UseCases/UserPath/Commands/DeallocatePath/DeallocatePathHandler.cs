@@ -26,9 +26,8 @@ namespace BreadingBread.Application.UseCases.UserPath.Commands.DeallocatePath
             if (path == null)
                 throw new NotFoundException("No se encuentra la ruta", currentPath.IdPath);
 
-            //TODO probar si al eliminar se eliminan la venta y el detalle de la venta
             path.Selected = false;
-            db.UserSale.Remove(currentPath);
+            currentPath.Visited = true;
 
             await db.SaveChangesAsync(cancellationToken);
             return new DeallocatePathResponse();
