@@ -29,6 +29,7 @@ namespace BreadingBread.Application.UseCases.Products.Commands.EditProduct
                 throw new NotFoundException(nameof(Product), request.Id);
 
             productToEdit.Name = request.Name;
+            productToEdit.Price = request.Price;
 
             await db.SaveChangesAsync(cancellationToken);
 
