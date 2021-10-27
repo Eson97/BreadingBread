@@ -23,16 +23,18 @@ namespace BreadingBread.Application.UseCases.Promotions.Queries.GetListPromotion
         public async Task<GetListPromotionByProductResponse> Handle(GetListPromotionByProductQuery request, CancellationToken cancellationToken)
         {
             var entity = await db.Promotion
-                .Where(el => !el.IsDeleted && el.Active)
+                .Where(el => !el.IsDeleted && el.Product.Id == request.IdProducto)
                 .Select(el => new PromotionModelByProduct
                 {
                     IdPromo = el.Id,
+                    IdProducto = el.Product.Id,
                     CantitySaleMin = el.CantitySaleMin,
                     SaleMin = el.SaleMin,
                     CantityFree = el.CantityFree,
-                    Discount = el.Discount
+                    Discount = el.Discount,
+                    Active = el.Active
                 })
-                //.OrderBy(el => (el.Discount > 0) ? el.Discount : el.CantityFree) //no se si esto funcione
+                .OrderBy(el => el.IdPromo)
                 .ToListAsync(cancellationToken);
 
             return new GetListPromotionByProductResponse { Promotions = entity };
