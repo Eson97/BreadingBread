@@ -14,7 +14,7 @@ namespace BreadingBread.Application.UseCases.Promotions.Commands.EditPromotion
             RuleFor(el => el.SaleMin).GreaterThanOrEqualTo(0);
             RuleFor(el => el.CantityFree).GreaterThanOrEqualTo(0);
             RuleFor(el => el.Discount).GreaterThanOrEqualTo(0);
-            RuleFor(el => el.Active).NotEmpty();
+            RuleFor(el => el.Active).NotNull();
         }
     }
 }

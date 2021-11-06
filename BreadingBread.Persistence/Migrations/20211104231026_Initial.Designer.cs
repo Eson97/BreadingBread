@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BreadingBread.Persistence.Migrations
 {
     [DbContext(typeof(BreadingBreadDbContext))]
-    [Migration("20211027030933_Initial")]
+    [Migration("20211104231026_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
