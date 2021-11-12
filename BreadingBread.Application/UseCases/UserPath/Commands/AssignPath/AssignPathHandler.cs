@@ -56,7 +56,7 @@ namespace BreadingBread.Application.UseCases.UserPath.Commands.AssignPath
 
             path.Selected = true;
             await db.UserSale.AddAsync(toAssign, cancellationToken);
-
+           
             await db.SaveChangesAsync(cancellationToken);
 
             return new AssignPathResponse { Id = toAssign.Id };
