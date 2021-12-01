@@ -49,6 +49,12 @@ namespace BreadingBread.Application.Infraestructure
                             && userAccessor.TipoUsuario != UserType.Admin)
                             failures.Add("No tienes permisos");
                         break;
+                    //Administrador y otro tienen el permiso
+                    case IOtherRequest<TRequest, TResponse> _:
+                        if (userAccessor.TipoUsuario != UserType.Other
+                            && userAccessor.TipoUsuario != UserType.Admin)
+                            failures.Add("No tienes permisos");
+                        break;
                     //Cualquiera Authenticado puede acceder
                     case IAuthenticatedRequest<TRequest, TResponse> _:
                         break;

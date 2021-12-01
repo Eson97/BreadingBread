@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BreadingBread.Application.UseCases.UserPath.Queries.GetActivePaths
 {
-    public class GetActivePathsAuth : IAdminRequest<GetActivePathsQuery, GetActivePathsResponse>
+    public class GetActivePathsAuth : IOtherRequest<GetActivePathsQuery, GetActivePathsResponse>
     {
         private readonly IBreadingBreadDbContext db;
         private readonly IUserAccessor currentUser;
