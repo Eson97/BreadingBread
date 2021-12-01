@@ -10,10 +10,12 @@ namespace BreadingBread.Application.UseCases.UserPath.Commands.DeallocatePath
     public class DeallocatePathHandler : IRequestHandler<DeallocatePathCommand, DeallocatePathResponse>
     {
         private readonly IBreadingBreadDbContext db;
+        private readonly IMediator mediator;
 
-        public DeallocatePathHandler(IBreadingBreadDbContext db)
+        public DeallocatePathHandler(IBreadingBreadDbContext db, IMediator mediator)
         {
             this.db = db;
+            this.mediator = mediator;
         }
 
         public async Task<DeallocatePathResponse> Handle(DeallocatePathCommand request, CancellationToken cancellationToken)
@@ -26,10 +28,15 @@ namespace BreadingBread.Application.UseCases.UserPath.Commands.DeallocatePath
             if (path == null)
                 throw new NotFoundException("No se encuentra la ruta", currentPath.IdPath);
 
-            path.Selected = false;
-            currentPath.Visited = true;
-
+            //path.Selected = false;
+            //currentPath.Visited = true;
             await db.SaveChangesAsync(cancellationToken);
+
+            _ = mediator.Publish(new DeallocatePathNotificate
+            {
+                IdUserSale = currentPath.Id
+            }, cancellationToken);
+
             return new DeallocatePathResponse();
         }
     }

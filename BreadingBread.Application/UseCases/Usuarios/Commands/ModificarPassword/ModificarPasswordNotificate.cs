@@ -36,7 +36,7 @@ namespace BreadingBread.Application.UseCases.Usuarios.Commands.ModificarPassword
                 await emailService.SendAsync(new Email
                 {
                     Body = $"Se ha modificado la contraseña",
-                    From = "AppIAS",
+                    To = "AppIAS",
                     Subject = "Modificacion Exitosa"
                 });
             }

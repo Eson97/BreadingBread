@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace BreadingBread.Application.UseCases.UserPath.Commands.DeallocatePath
 {
-    public class DeallocatePathAuth : IUserRequest<DeallocatePathCommand, DeallocatePathResponse>
+    public class DeallocatePathAuth : IAuthenticatedRequest<DeallocatePathCommand, DeallocatePathResponse>
     {
         public DeallocatePathAuth()
         {
