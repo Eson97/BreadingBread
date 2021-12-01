@@ -11,7 +11,8 @@ namespace BreadingBread.Infraestructure
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             // Add configuration
-            //services.Configure<EmailServiceOptions>(configuration.GetSection("EmailService"));
+            var emailConfig = configuration.GetSection("EmailService");
+            services.Configure<EmailServiceOptions>(emailConfig);
             //services.Configure<FileServiceOptions>(configuration.GetSection("FileService"));
             //services.Configure<AvatarServiceOptions>(configuration.GetSection("AvatarService"));
 
@@ -20,9 +21,9 @@ namespace BreadingBread.Infraestructure
             services.AddSingleton<IRandomGenerator, RandomGenerator>();
             services.AddSingleton<IFileService, FileService>();
             services.AddSingleton<IHtmlSanitizer, HtmlSanitizer>();
+            services.AddSingleton<IEmailService, EmailService>();
+            services.AddSingleton<IExcelService, ExcelService>();
 
-            //services.AddSingleton<IAvatarService, AvatarService>();
-            //services.AddSingleton<IEmailService, EmailService>();
             //services.AddSingleton<IPushNotificationService, PushNotificationService>();
             return services;
         }

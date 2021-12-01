@@ -30,7 +30,6 @@ namespace BreadingBread.WebUi.Controllers
             this.authOptions = options.Value;
         }
 
-
         [HttpPost]
         public async Task<ActionResult<IngresarResponse>> Ingresar([FromBody] GetUserLoginQuery query)
         {

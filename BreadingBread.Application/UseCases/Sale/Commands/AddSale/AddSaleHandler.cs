@@ -25,7 +25,6 @@ namespace BreadingBread.Application.UseCases.Sale.Commands.AddSale
 
         public async Task<AddSaleResponse> Handle(AddSaleCommand request, CancellationToken cancellationToken)
         {
-            //TODO hacer en una transaccion
             var userSale = await
                 db.UserSale
                 .Where(el => el.IdUser == currentUser.UserId && !el.Visited)
@@ -61,7 +60,6 @@ namespace BreadingBread.Application.UseCases.Sale.Commands.AddSale
                 Visited = dateTime.Now
             };
 
-            pathStore.Visited = true; //marcamos la tienda en ruta como visitada
             await db.Sale.AddAsync(sale, cancellationToken);
             await db.SaveChangesAsync(cancellationToken);
 

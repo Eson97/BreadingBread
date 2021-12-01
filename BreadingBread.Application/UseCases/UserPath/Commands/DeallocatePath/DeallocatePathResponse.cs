@@ -1,6 +1,6 @@
 namespace BreadingBread.Application.UseCases.UserPath.Commands.DeallocatePath
 {
-    public class DeallocatePathResponse
+    public class DeallocatePathResponse : NotificationResponse
     {
 
     }
