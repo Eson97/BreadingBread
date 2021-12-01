@@ -30,7 +30,9 @@ namespace BreadingBread.Application.UseCases.UserPath.Queries.GetActivePaths
                                 select new ActivePathsModel
                                 {
                                     Id = userSale.Id,
-                                    Name = userSale.Path.Name
+                                    Name = userSale.Path.Name,
+                                    VendorName = userSale.User.Name
+                                    
                                 }
                                 ).ToListAsync(cancellationToken);
 
