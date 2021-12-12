@@ -13,5 +13,6 @@ namespace BreadingBread.Application.UseCases.UserPath.Queries.GetActivePaths
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string VendorName { get; set; }
     }
 }
