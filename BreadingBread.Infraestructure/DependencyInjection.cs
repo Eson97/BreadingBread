@@ -13,8 +13,8 @@ namespace BreadingBread.Infraestructure
             // Add configuration
             var emailConfig = configuration.GetSection("EmailService");
             services.Configure<EmailServiceOptions>(emailConfig);
-            //services.Configure<FileServiceOptions>(configuration.GetSection("FileService"));
-            //services.Configure<AvatarServiceOptions>(configuration.GetSection("AvatarService"));
+            services.Configure<FileServiceOptions>(configuration.GetSection("FileService"));
+            services.Configure<AvatarServiceOptions>(configuration.GetSection("AvatarService"));
 
             // Add framework services.
             services.AddSingleton<IDateTime, MachineDateTime>();

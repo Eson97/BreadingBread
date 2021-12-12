@@ -34,7 +34,6 @@ namespace BreadingBread.Application.UseCases.UserPath.Queries.GetActivePaths
                                 }
                                 ).ToListAsync(cancellationToken);
 
-
             return new GetActivePathsResponse { ActivePaths = activePathsWithoutInventory };
         }
     }

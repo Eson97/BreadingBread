@@ -1,4 +1,6 @@
 ﻿using BreadingBread.Application.Notifications.Models;
+using MimeKit;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace BreadingBread.Application.Interfaces
