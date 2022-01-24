@@ -2,6 +2,8 @@ using BreadingBread.Application.Exceptions;
 using BreadingBread.Application.Interfaces;
 using BreadingBread.Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -32,10 +34,17 @@ namespace BreadingBread.Application.UseCases.UserPath.Commands.DeallocatePath
             //currentPath.Visited = true;
             await db.SaveChangesAsync(cancellationToken);
 
-            _ = mediator.Publish(new DeallocatePathNotificate
-            {
-                IdUserSale = currentPath.Id
-            }, cancellationToken);
+            //Enviar correo con las ventas realizadas
+            var usersToNotificate = await db.User.Where(el => el.Aproved && el.UserType == Domain.Enums.UserType.Admin).ToListAsync();
+            var sales = await db.Sale.Where(s => s.IdUserSale == currentPath.Id).ToListAsync();
+            if (usersToNotificate.Count > 0)
+                _ = mediator.Publish(new DeallocatePathNotificate
+                {
+                    IdUserSale = currentPath.Id,
+                    UserSale = currentPath,
+                    Sales = sales,
+                    UsersToNotificate = usersToNotificate
+                }, cancellationToken);
 
             return new DeallocatePathResponse();
         }
