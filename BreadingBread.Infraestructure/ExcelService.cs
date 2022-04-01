@@ -127,6 +127,29 @@ namespace BreadingBread.Infraestructure
             }
             return result;
         }
+
+        public List<ExcelCellAux> FromObjectMatrix(IEnumerable<IEnumerable<object>> records, int startRow = 1, int startCol = 1, bool includeIndex = false)
+        {
+            List<ExcelCellAux> result = new List<ExcelCellAux>();
+            int currRow = startRow;
+            foreach (var curColumn in records)
+            {
+                int curCol = startCol;
+                if (includeIndex)
+                {
+                    result.Add(new ExcelCellAux(currRow, curCol, currRow - startRow + 1));
+                    curCol++;
+                }
+
+                foreach (var property in curColumn)
+                {
+                    result.Add(new ExcelCellAux(currRow, curCol, property));
+                    curCol++;
+                }
+                currRow++;
+            }
+            return result;
+        }
     }
 }
 

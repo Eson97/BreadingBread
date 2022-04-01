@@ -22,7 +22,8 @@ namespace BreadingBread.Application.UseCases.UserPath.Commands.DeallocatePath
 
         public async Task<DeallocatePathResponse> Handle(DeallocatePathCommand request, CancellationToken cancellationToken)
         {
-            var currentPath = await db.UserSale.FindAsync(request.Id);
+            var currentPath = await db.UserSale.Include(u => u.User).FirstOrDefaultAsync(us => us.Id == request.Id);
+
             if (currentPath == null)
                 throw new NotFoundException(nameof(UserSale), request.Id);
 
@@ -36,7 +37,14 @@ namespace BreadingBread.Application.UseCases.UserPath.Commands.DeallocatePath
 
             //Enviar correo con las ventas realizadas
             var usersToNotificate = await db.User.Where(el => el.Aproved && el.UserType == Domain.Enums.UserType.Admin).ToListAsync();
-            var sales = await db.Sale.Where(s => s.IdUserSale == currentPath.Id).ToListAsync();
+            var sales = await db.Sale
+                .Include(p => p.Products)
+                .ThenInclude(p => p.Product)
+                .Where(s => s.IdUserSale == currentPath.Id).ToListAsync();
+
+            foreach (var sale in sales)
+                sale.StoreVisited = await db.Store.FirstOrDefaultAsync(s => s.Id == sale.IdStore);
+
             if (usersToNotificate.Count > 0)
                 _ = mediator.Publish(new DeallocatePathNotificate
                 {
