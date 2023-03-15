@@ -22,4 +22,8 @@
     <ProjectReference Include="..\BreadingBread.Domain\Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="UseCases\UserPath\Queries\GetExcelReportByUserSale\" />
+  </ItemGroup>
+
 </Project>

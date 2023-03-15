@@ -22,14 +22,10 @@ namespace BreadingBread.Application.UseCases.UserPath.Commands.DeallocatePath
 
         public async Task<DeallocatePathResponse> Handle(DeallocatePathCommand request, CancellationToken cancellationToken)
         {
-            var currentPath = await db.UserSale.Include(u => u.User).FirstOrDefaultAsync(us => us.Id == request.Id);
-
-            if (currentPath == null)
-                throw new NotFoundException(nameof(UserSale), request.Id);
-
-            var path = await db.Path.FindAsync(currentPath.IdPath);
-            if (path == null)
-                throw new NotFoundException("No se encuentra la ruta", currentPath.IdPath);
+            var currentPath = await db.UserSale.Include(u => u.User).FirstOrDefaultAsync(us => us.Id == request.Id)
+                ?? throw new NotFoundException(nameof(UserSale), request.Id);
+            var path = await db.Path.FindAsync(currentPath.IdPath)
+                ?? throw new NotFoundException("No se encuentra la ruta", currentPath.IdPath);
 
             //path.Selected = false;
             //currentPath.Visited = true;

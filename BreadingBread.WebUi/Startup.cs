@@ -170,7 +170,6 @@ namespace BreadingBread.WebUi
             app.UseAuthentication();
             app.UseAuthorization();
 
-
             app.UseEndpoints(endpoints =>
             {
 

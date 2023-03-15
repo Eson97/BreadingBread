@@ -30,8 +30,8 @@ namespace BreadingBread.Application.Infraestructure
         {
             timer.Start();
             // El Usuario no esta autenticado y existen reglas
-            if (!userAccessor.IsAuthenticated && _rules.Count > 0)
-                throw new NotAuthorizedException("No autorizado");
+            //if (!userAccessor.IsAuthenticated && _rules.Count > 0)
+            //    throw new NotAuthorizedException("No autorizado");
 
             List<string> failures = new List<string>();
             foreach (var rule in _rules)
